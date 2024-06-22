@@ -30,4 +30,9 @@ public class UserRegistrationResponse {
     public void setMessage(String message) {
         this.message = message;
     }
+    public void updateResponse(String error, String status, String message){
+        setError(error);
+        setStatus(status);
+        setMessage(message);
+    }
 }

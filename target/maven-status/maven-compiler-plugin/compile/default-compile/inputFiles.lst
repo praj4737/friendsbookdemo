@@ -4,4 +4,5 @@ C:\maven_projects\friendsbook\src\main\java\com\dbutils\UserDAO.java
 C:\maven_projects\friendsbook\src\main\java\com\constants\AppContants.java
 C:\maven_projects\friendsbook\src\main\java\com\beans\User.java
 C:\maven_projects\friendsbook\src\main\java\com\response\beans\UserRegistrationResponse.java
-C:\maven_projects\friendsbook\src\main\java\com\business\UserAuthenticationBusiness.java
+C:\maven_projects\friendsbook\src\main\java\com\validator\DataValidator.java
+C:\maven_projects\friendsbook\src\main\java\com\constants\CommonErros.java

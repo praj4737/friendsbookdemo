@@ -1,8 +1,10 @@
 package com.controller;
 
 import com.beans.User;
-import com.business.UserAuthenticationBusiness;
+import com.constants.CommonErros;
+import com.dbutils.UserDAO;
 import com.response.beans.UserRegistrationResponse;
+import com.validator.DataValidator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -10,10 +12,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 
 @WebServlet("/registerUser")
 public class RegistrationController extends HttpServlet {
@@ -26,18 +25,18 @@ public class RegistrationController extends HttpServlet {
         String password=req.getParameter("password");
         String confirmPassword=req.getParameter("confirmPassword");
         LocalDate dob= LocalDate.parse(req.getParameter("birthdayDate"));
-
-        resp.getWriter().println(dob);
+        UserRegistrationResponse response=new UserRegistrationResponse();
         if(confirmPassword.equals(password)){
-           User user=new User(0,fName+" "+lName,gender,dob,email,password);
-            UserAuthenticationBusiness business=new UserAuthenticationBusiness();
-            UserRegistrationResponse response=new UserRegistrationResponse();
-            business.userRegister(user,response);
-            resp.getWriter().println(response.getError());
-            resp.getWriter().println(response.getMessage());
-            resp.getWriter().println(response.getStatus());
-       }else{
-            resp.getWriter().println("Password did not match");
+            User user=new User(UserDAO.getCorrespondigId("users"),fName+" "+lName,gender,dob,email,password);
+            if(DataValidator.validateUserData(user,response)){
+                UserDAO.registerUsersss(user,response);
+            }
+
+        }else{
+            response.updateResponse(CommonErros.PASSWORD_NOT_MATCHED,CommonErros.BAD_REQUEST,null);
         }
+        resp.getWriter().println(response.getError());
+        resp.getWriter().println(response.getMessage());
+        resp.getWriter().println(response.getStatus());
     }
 }
