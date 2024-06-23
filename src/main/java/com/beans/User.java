@@ -10,14 +10,16 @@ public class User {
     private LocalDate dob;
     private String email;
     private String password;
+    private String dp;
     public User(){}
-    public User(int userId, String userName, String gender, LocalDate dob, String email, String password) {
+    public User(int userId, String userName, String gender, LocalDate dob, String email, String password, String dp) {
         this.userId = userId;
         this.userName = userName;
         this.gender = gender;
         this.dob = dob;
         this.email = email;
         this.password = password;
+        this.dp = dp;
     }
 
     public int getUserId() {
@@ -66,5 +68,11 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    public String getDp() {
+        return dp;
+    }
+    public void setDp(String dp) {
+        this.dp = dp;
     }
 }
