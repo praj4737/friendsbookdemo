@@ -124,4 +124,21 @@ public class UserDAO {
         query[1]="insert into creds values("+(UserDAO.getCorrespondigId("creds")+1)+","+user.getUserId()+",'"+user.getPassword()+"','"+ LocalDate.now()+"',null);";
         return query;
     }
+    public static boolean dpUploaddao(User user) {
+        Connection con=DBUtils.getDbConnection();
+        Statement st=null;
+        ResultSet rd=null;
+        boolean result=false;
+        String QUERY = "insert into dp_table values("+user.getUserId()+","+user.getUserId()+",'"+user.getDp()+"','"+LocalDate.now()+"', null);";
+        try {
+            st = con.createStatement();
+            int row =  st.executeUpdate(QUERY);
+            if(row>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

@@ -1,0 +1,13 @@
+
+
+#myheader{
+    border: 1px none black;
+    background-color: #d9d4d4   ;
+}
+#container{
+    border: 1px none black;
+    height: 50vh;
+}
+#uploadPictureDiv{
+    width: 30rem;
+}
