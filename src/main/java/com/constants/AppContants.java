@@ -8,5 +8,5 @@ public class AppContants {
     public static final String MOBILE_REGEX="[7-9][0-9]{9}$";
     public static final String USER_REGISTERED="User Registered Successfully";
     public static final String SUCCESS_CODE="200";
-
+    public static final String ALLOWED_TYPES="image/jpeg, image/png";
 }

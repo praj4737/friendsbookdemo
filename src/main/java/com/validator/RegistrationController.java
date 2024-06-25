@@ -1,4 +1,4 @@
-package com.controller;
+package com.validator;
 
 import com.beans.User;
 import com.constants.CommonErros;
@@ -10,6 +10,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -27,9 +28,13 @@ public class RegistrationController extends HttpServlet {
         LocalDate dob= LocalDate.parse(req.getParameter("birthdayDate"));
         UserRegistrationResponse response=new UserRegistrationResponse();
         if(confirmPassword.equals(password)){
-            User user=new User(UserDAO.getCorrespondigId("users"),fName+" "+lName,gender,dob,email,password);
+            User user=new User(UserDAO.getCorrespondigId("users"),fName+" "+lName,gender,dob,email,password,null);
             if(DataValidator.validateUserData(user,response)){
                 UserDAO.registerUsersss(user,response);
+                HttpSession session=req.getSession();
+                session.setAttribute("user",user);
+                resp.sendRedirect("uploadDp.jsp");
+               // req.getRequestDispatcher("uploadDp.jsp").forward(req, resp);
             }
 
         }else{

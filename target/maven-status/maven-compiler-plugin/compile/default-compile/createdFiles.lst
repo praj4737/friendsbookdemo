@@ -1,8 +1,9 @@
 com\response\beans\UserRegistrationResponse.class
-com\controller\RegistrationController.class
+com\validator\DpUploadServlet.class
 com\constants\AppContants.class
 com\beans\User.class
 com\constants\CommonErros.class
 com\dbutils\UserDAO.class
 com\validator\DataValidator.class
 com\dbutils\DBUtils.class
+com\validator\RegistrationController.class

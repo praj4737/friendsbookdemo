@@ -98,6 +98,7 @@ public class UserDAO {
             pst2.executeUpdate();
             con.commit();
             response.updateResponse(null,AppContants.SUCCESS_CODE,AppContants.USER_REGISTERED);
+            response.setUserId(user.getUserId());
         } catch (SQLException e) {
             try {
                 con.rollback();

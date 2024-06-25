@@ -1,6 +1,7 @@
-package com.controller;
+package com.validator;
 
 import com.beans.User;
+import com.constants.AppContants;
 import com.dbutils.UserDAO;
 import com.mysql.cj.exceptions.StreamingNotifiable;
 import jakarta.servlet.ServletException;
@@ -18,49 +19,52 @@ import java.io.InputStream;
 public class DpUploadServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+    	User user = (User) req.getSession().getAttribute("user");
         if (user == null) {
-            resp.sendRedirect("login.jsp");
-        }else{
-            Part part=req.getPart("file");
-            resp.getWriter().println(part.getSubmittedFileName());
-           String path = "C:\\friendsbookdemo\\src\\main\\webapp\\usersDp";
-            String filename = "usrdp"+String.valueOf(user.getUserId())+".jpg";
-            path = path+ File.separator+filename;
-           FileOutputStream fout = null;
+            req.getRequestDispatcher("index.jsp").forward(req, resp);
+        }
+        Part part=req.getPart("file");
+        String fileType=part.getContentType();
+        if(AppContants.ALLOWED_TYPES.contains(fileType)) {
+        	String filename = "usrdp"+String.valueOf(user.getUserId())+getExtension(fileType);
+        	FileOutputStream fout = null;
             InputStream fin = null;
-
             try {
                 fin = part.getInputStream();
                 byte[] images = new byte[fin.available()];
                 fin.read(images);
+                String path="C:\\maven_projects\\friendsbook\\src\\main\\webapp\\usersDp\\"+filename;
                 fout = new FileOutputStream(path);
                 fout.write(images);
+                user.setDp(filename);
+                if(UserDAO.dpUploaddao(user)){
+                    resp.getWriter().println("image saved to database");
+                }else{
+                    resp.getWriter().println("image not  saved to database");
+
+                }
 
             }catch (IOException e){
                 resp.getWriter().println("Something went wrong File can't be uploaded.");
             }finally {
                 try {
-                    //fout.flush();
+                    fout.flush();
                     fout.close();
                     fin.close();
                 }catch (IOException e){
                     e.printStackTrace();
                 }
             }
-
-            resp.getWriter().println("file uploaded successfully");
-            user.setDp(path);
-
-            if(UserDAO.dpUploaddao(user)){
-                resp.getWriter().println("image saved to database");
-            }else{
-                resp.getWriter().println("image not  saved to database");
-
-            }
-
+        }else {
+        	System.out.println("Not Allowed");
         }
+        
+        
 
     }
+    
+    public static String getExtension(String type) {
+    	return "."+type.split("/")[1];
+    }
+    
 }
