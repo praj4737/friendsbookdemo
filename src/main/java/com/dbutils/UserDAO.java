@@ -142,4 +142,102 @@ public class UserDAO {
         }
         return false;
     }
+    public static boolean LoginDao(String email, String password){
+
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+
+        if(isEmailExistInDB(email)){
+            int userId = getUserId(email);
+            if(userId!=-1){
+                con=DBUtils.getDbConnection();
+                String QUERY  = "select password from creds where userId="+userId+";";
+                try {
+                    st = con.createStatement();
+                    rs = st.executeQuery(QUERY);
+                    if(rs.next()){
+                        //return true;
+                        if(rs.getString(1).equals(password)){
+                            return true;
+                        }else{
+                            return false;
+                        }
+                    }else{
+                        return false;
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }else{
+                return false;
+            }
+        }else{
+            return false;
+        }
+
+
+    }
+    public static int getUserId(String email){
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        String QUERY = "select userId from users where email='"+email+"';";
+
+        con = DBUtils.getDbConnection();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(QUERY);
+            if(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return -1;
+    }
+    public static User getUser(String email){
+        User user = new User();
+        user.setUserId(getUserId(email));
+
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        String QUERY = "select * from users where userId = "+user.getUserId()+";";
+        con = DBUtils.getDbConnection();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(QUERY);
+            if(rs.next()){
+                user.setUserId(rs.getInt(1));
+                user.setEmail(rs.getString(2));
+                user.setUserName(rs.getString(3));
+                user.setGender(rs.getString(4));
+                user.setDob(rs.getDate(5).toLocalDate());
+
+                return user;
+
+            }
+        }catch(SQLException se){se.printStackTrace();}
+
+        return null;
+    }
+    public static boolean makePost(User user){
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        boolean result=false;
+        String QUERY = "insert into user_post values('"+user.getUserPost().getPostId()+"',"+user.getUserId()+",'"+user.getUserPost().getCaption()+"','"+user.getUserPost().getImage()+"','"+user.getUserPost().getLikes()+"','"+user.getUserPost().getComments()+"','"+user.getUserPost().getShares()+"','"+user.getUserPost().getDateOfPost()+"');";
+        con = DBUtils.getDbConnection();
+        try {
+            st = con.createStatement();
+            int row =  st.executeUpdate(QUERY);
+            if(row>0){
+                return true;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return false;
+    }
 }

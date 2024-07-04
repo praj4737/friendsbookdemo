@@ -8,5 +8,6 @@ public class CommonErros {
     public static final String UNABLE_TO_REGISTER_USER="UNABLE_TO_REGISTER_USER";
     public static final String AGE_BELOW_EIGHTEEN="Age is not 18";
     public static final String BAD_REQUEST="400";
+    public static final String LOGIN_FAILED="LOGIN_FAILED";
 
 }

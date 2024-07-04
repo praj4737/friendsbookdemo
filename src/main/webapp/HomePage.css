@@ -1,0 +1,29 @@
+body
+{
+    overflow: scroll;
+}
+body a{
+    text-decoration: none;
+}
+#searchBox{
+    border: 2px solid black;
+}
+body input{
+    border-radius: 10px;
+    border: none;
+}
+.ms-6{
+    margin-left: 6rem;
+}
+.header{
+
+}
+
+
+.dp{
+    height: 50px;
+    width: 50px;
+}
+.uploadImage{
+    border: none;
+}

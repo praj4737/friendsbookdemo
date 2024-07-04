@@ -11,6 +11,7 @@ public class User {
     private String email;
     private String password;
     private String dp;
+    private UserPost userPost;
     public User(){}
     public User(int userId, String userName, String gender, LocalDate dob, String email, String password, String dp) {
         this.userId = userId;
@@ -75,4 +76,11 @@ public class User {
     public void setDp(String dp) {
         this.dp = dp;
     }
+    public UserPost getUserPost() {
+        return userPost;
+    }
+    public void setUserPost(UserPost userPost) {
+        this.userPost = userPost;
+    }
+
 }
