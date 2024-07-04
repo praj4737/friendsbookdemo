@@ -9,6 +9,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 </head>
 <body>
     <%
@@ -27,19 +29,25 @@
             <!-- User Profile (on the left side) -->
             <div class="d-flex align-items-center">
                 <!-- User Profile Picture -->
-                <img alt="User Profile" class="rounded-circle" width="40" height="40" src="usersDp/<%= user.getDp()%>" />
+                 <div class="relative me-4">
+                                <img src="usersDp/<%= user.getDp()%>" class="w-10 h-10 rounded-full" src="/docs/images/people/profile-picture-5.jpg" alt="profile image">
+                                <span class="top-0 start-7 absolute w-3.5 h-3.5 bg-green-500 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                            </div>
+
     
                 <!-- User Name -->
                 <span class="ms-2"><% out.print(user.getUserName()); %></span>
     
-                <!-- Online Status Icon (you can use an icon library like Font Awesome) -->
-                <span class="flex w-3 h-3 me-3 bg-gray-900 rounded-full dark:bg-gray-700"></span>
+
             </div>
             <!-- Logo (on the right side) -->
             <div class="d-flex justify-content-center" style="margin-left: 3%;">
                 <a class="navbar-brand" href="#">Your Logo</a>
             </div>
-            
+
+
+
+
     
             
     

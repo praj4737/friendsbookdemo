@@ -14,7 +14,16 @@
       <scope>provided</scope>
     </dependency>
     <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+
+    <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
     <dependency>
+      <groupId>com.sun.mail</groupId>
+      <artifactId>jakarta.mail</artifactId>
+      <version>2.0.1</version>
+    </dependency>
+
+    <dependency>
+
       <groupId>mysql</groupId>
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.33</version>
@@ -40,6 +49,12 @@
       <artifactId>cos</artifactId>
       <version>05Nov2002</version>
     </dependency>
+
+    <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
+    <!-- https://mvnrepository.com/artifact/jakarta.mail/jakarta.mail-api -->
+
+
+
 
   </dependencies>
   <build>
