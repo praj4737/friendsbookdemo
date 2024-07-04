@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+
+function isScrolledToBottom() {
+    const scrollPosition = window.scrollY;
+    const windowHeight = window.innerHeight;
+    const documentHeight = document.body.scrollHeight;
+  
+    return (scrollPosition + windowHeight) >= document.body.scrollHeight;
+  }
+  
+  // Usage:
+  $(document).ready(() => {
+    // Similar logic as option 1 here
+    const isAtBottom = isScrolledToBottom();
+    if (isAtBottom) {
+      console.log("You've reached the bottom of the page on load!");
+      // Trigger action for initial content at bottom
+    }
+  
+    $(window).scroll(() => {
+      const isAtBottom = isScrolledToBottom();
+      if (isAtBottom) {
+        console.log("You've scrolled to the bottom of the page!");
+        // Trigger action for newly loaded content
+      }
+    });
+  });
+
+        var x = 0;
+        $(document).ready(function(){
+        $("body").scroll(function(){
+            $("span").text( x+= 1);
+           console.log("scrolled")
+          // alert("scrolled")
+        });
+        });
+</script>
+</head>
+<body>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <var>  <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <div style="border: 1px solid black;height: 80px;overflow: scroll;">
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dcskdlv;csdnvsdklnvsdlkvnsdl;vnl;dnv;nslvnslndvlnsd
+        dsvasdvsdvsddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+        dddddddddddddddddddddddddddddddddddddddddddddddddd
+        ddddddddddddddddddddddddddddddddddddddddddddddddd
+    </div>
+    <p>Scrolled <span>0</span> times.</p>
+</body>
+</html>

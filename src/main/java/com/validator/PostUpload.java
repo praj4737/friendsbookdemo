@@ -29,7 +29,7 @@ public class PostUpload extends HttpServlet {
         }
         //let's set post details here
         UserPost post = new UserPost();
-        post.setPostId("post1");
+        post.setPostId("post2");
         post.setCaption(req.getParameter("caption"));
         post.setDateOfPost(LocalDate.now());
 

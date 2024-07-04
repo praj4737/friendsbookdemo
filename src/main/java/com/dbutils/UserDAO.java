@@ -58,7 +58,7 @@ public class UserDAO {
                 st = (Statement) con.createStatement();
                 rd=st.executeQuery("select count(*) from "+tableName);
                 rd.next();
-                count=rd.getInt(1);
+                count=rd.getInt(1)+1;
             } catch (SQLException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -130,7 +130,7 @@ public class UserDAO {
         Statement st=null;
         ResultSet rd=null;
         boolean result=false;
-        String QUERY = "insert into dp_table values("+user.getUserId()+","+user.getUserId()+",'"+user.getDp()+"','"+LocalDate.now()+"', null);";
+        String QUERY = "insert into dp_table values("+getCorrespondigId("dp_table")+","+user.getUserId()+",'"+user.getDp()+"','"+LocalDate.now()+"', null);";
         try {
             st = con.createStatement();
             int row =  st.executeUpdate(QUERY);

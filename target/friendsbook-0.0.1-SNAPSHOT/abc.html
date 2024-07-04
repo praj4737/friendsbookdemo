@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include Bootstrap CSS and jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- ... -->
+</head>
+<body>
+    <div class="container mt-5">
+        <textarea id="postInput" class="form-control" placeholder="Write a post..."></textarea>
+        <button id="postButton" class="btn btn-primary mt-2">Post</button>
+        <div id="postsContainer" class="mt-3"></div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Handle post button click
+            $('#postButton').click(function() {
+                const postText = $('#postInput').val();
+                if (postText.trim() !== '') {
+                    const newPost = `<div class="card mt-3">
+                                        <div class="card-body">${postText}</div>
+                                    </div>`;
+                    $('#postsContainer').prepend(newPost);
+                    $('#postInput').val(''); // Clear input
+                }
+            });
+        });
+    </script>
+</body>
+</html>
