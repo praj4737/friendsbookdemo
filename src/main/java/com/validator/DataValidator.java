@@ -14,7 +14,9 @@ public class DataValidator {
         if(isName(user.getUserName(), response)){
             if(isEmail(user.getEmail(),response)){
                 if(isAgeEighteenPlus(user.getDob(),response) && !isEmailExis(user.getEmail(),response)){
-                    return true;
+                    if(isStrongPasswordUsed(user.getPassword(),response)){
+                        return true;
+                    }
                 }
             }
         }
@@ -48,6 +50,14 @@ public class DataValidator {
             response.updateResponse(CommonErros.EMAIL_ALREADY_EXIST, CommonErros.BAD_REQUEST,null);
             return true;
         }
+        return false;
+    }
+
+    private static boolean isStrongPasswordUsed(String password,UserRegistrationResponse response){
+        if(password.matches(AppContants.PASSWORD_REGEX)){
+            return true;
+        }
+        response.updateResponse(CommonErros.PASSWORD_STANDARD_ERROR,CommonErros.BAD_REQUEST,null);
         return false;
     }
 }

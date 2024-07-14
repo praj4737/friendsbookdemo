@@ -2,19 +2,17 @@ package com.beans;
 import java.util.*;
 public class OTPGenerater {
 
-    public static int[] generateOTP() {
+    public static String generateOTP() {
         String number = "1234567890";
-        int[] otp = new int[4];
+        char[] otp = new char[4];
         int n;
         Random rand = new Random();
 
         for(int i=0;i<4;i++){
-            otp[i] = (rand.nextInt((9-0)+1)+0);
+            otp[i] = number.charAt(rand.nextInt(number.length()));
         }
-        for(int i=0;i<4;i++){
-            System.out.println(otp[i]);
-        }
-        return otp;
+
+        return String.valueOf(otp);
     }
 
     }

@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="Registration.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="commonJSControllers.js"></script>
     <style>
     .gradient-custom {
 
@@ -27,6 +29,65 @@
         }
 
         </style>
+
+        <script>
+
+            $(document).ready(function() {
+
+                    $('#myForm').submit(function(event) {
+                        event.preventDefault();
+                        $("#error").hide();
+                        $.ajax({
+                            type: 'POST',
+                            url: "registerUser",
+                            data: convertFormToJSON($("#myForm")),
+                            success: function (data) {
+                                var response=$.parseJSON(data)
+                                if(!(response.status === '200')){
+                                        showErrorAlert(response.error);
+                                }else if(response.status === '200'){
+                                    $("#exampleModal").modal('show');
+                                }
+                            },
+                            error: function (data) {
+                                alert(data);
+                                console.log(data);
+                                alert("error");
+                            }
+                        });
+                  });
+
+                    $("#OTPVerify").click(function(){
+                    var data='{"otp":"'+$("#otp").val()+'"}';
+                    console.log(data);
+                        $.ajax({
+                                                    type: 'POST',
+                                                    url: "otpVerify",
+                                                    data: convertFormToJSON($("#otpForm")),
+                                                    success: function (data) {
+                                                        var response=$.parseJSON(data)
+                                                        if(!(response.status === '200')){
+                                                                showErrorAlert(response.error);
+                                                        }else if(response.status === '200'){
+                                                            alert("Registered Successfully");
+                                                            window.location.replace("uploadDp.jsp");
+                                                        }
+                                                    },
+                                                    error: function (data) {
+                                                        alert(data);
+                                                        console.log(data);
+                                                        alert("error");
+                                                    }
+                                                });
+                    });
+                });
+
+                function showErrorAlert(msg){
+                    $("#error").show();
+                    $("#error").text(msg);
+
+                }
+        </script>
 </head>
 <body>
     <section class="vh-100 gradient-custom">
@@ -36,14 +97,16 @@
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
                   <a href=""><h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><i class="fa fa-facebook">riendsBook</i></h3></a>
+                    <div class="alert alert-danger" role="alert" id="error" style="display:none">
 
-                  <form action="registerUser" method="post">
+                    </div>
+                  <form id="myForm" >
 
                     <div class="row">
                       <div class="col-md-6 mb-4">
 
                         <div data-mdb-input-init class="form-outline">
-                          <input type="text" name="firstName" class="form-control form-control-lg" />
+                          <input type="text" name="firstName" class="form-control form-control-lg" required/>
                           <label class="form-label" for="firstName">First Name</label>
                         </div>
 
@@ -51,7 +114,7 @@
                       <div class="col-md-6 mb-4">
 
                         <div data-mdb-input-init class="form-outline">
-                          <input type="text" name="lastName" class="form-control form-control-lg" />
+                          <input type="text" name="lastName" class="form-control form-control-lg" required />
                           <label class="form-label" for="lastName">Last Name</label>
                         </div>
 
@@ -62,7 +125,7 @@
                       <div class="col-md-6 mb-4 d-flex align-items-center">
 
                         <div data-mdb-input-init class="form-outline datepicker w-100">
-                          <input type="date" class="form-control form-control-lg" name="birthdayDate" />
+                          <input type="date" class="form-control form-control-lg" name="birthdayDate"required />
                           <label for="birthdayDate" class="form-label">Birthday</label>
                         </div>
 
@@ -96,7 +159,7 @@
                       <div class="col-md-6 mb-4 pb-2">
 
                         <div data-mdb-input-init class="form-outline">
-                          <input type="email" name="emailAddress" class="form-control form-control-lg" />
+                          <input type="email" name="emailAddress" class="form-control form-control-lg" required/>
                           <label class="form-label" for="emailAddress">Email</label>
                         </div>
 
@@ -106,7 +169,7 @@
                                             <div class="col-md-6 mb-4">
 
                                               <div data-mdb-input-init class="form-outline">
-                                                <input type="text" name="password" class="form-control form-control-lg" />
+                                                <input type="password" name="password" class="form-control form-control-lg" required/>
                                                 <label class="form-label" for="firstName">Password</label>
                                               </div>
 
@@ -114,7 +177,7 @@
                                             <div class="col-md-6 mb-4">
 
                                               <div data-mdb-input-init class="form-outline">
-                                                <input type="text" name="confirmPassword" class="form-control form-control-lg" />
+                                                <input type="password" name="confirmPassword" class="form-control form-control-lg" required/>
                                                 <label class="form-label" for="lastName">Confirm Password</label>
                                               </div>
 
@@ -130,7 +193,7 @@
 
 
                     <div class="mt-4 pt-2">
-                      <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit" value="Sign Up" />
+                      <input data-mdb-ripple-init class="btn btn-primary btn-lg" type="submit"  value="Sign Up" />
                     </div>
 
                   </form>
@@ -140,5 +203,33 @@
           </div>
         </div>
       </section>
+
+
+
+
+
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Verify OTP</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+            <form id="otpForm">
+              <input type="text" id="otp" name="otp">
+              </form>
+            </div>
+            <div class="modal-footer">
+
+              <button type="button" class="btn btn-primary" id="OTPVerify">Verify</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
 </body>
 </html>

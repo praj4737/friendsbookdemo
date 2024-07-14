@@ -27,8 +27,8 @@ public class OTPvalidaterForEmail extends HttpServlet {
         final String user="pranav7061597110@gmail.com";
         final String pass="spsb qjnb jxzx hnob";
         String subject = "FriendsBook";
-        int[] otp = OTPGenerater.generateOTP();
-        String msg = "OTP for Validation is: "+String.valueOf(otp[0])+String.valueOf(otp[1])+String.valueOf(otp[2])+String.valueOf(otp[3]);
+        String otp = OTPGenerater.generateOTP();
+        String msg = "OTP for Validation is: "+otp;
 
 
 

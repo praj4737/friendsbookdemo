@@ -9,5 +9,6 @@ public class CommonErros {
     public static final String AGE_BELOW_EIGHTEEN="Age is not 18";
     public static final String BAD_REQUEST="400";
     public static final String LOGIN_FAILED="LOGIN_FAILED";
+    public static final String PASSWORD_STANDARD_ERROR = "PASSWORD IS NOT STRONG";
 
 }

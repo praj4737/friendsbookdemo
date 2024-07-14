@@ -1,7 +1,9 @@
 com\validator\DpUploadServlet.class
 com\response\beans\UserLoginResponse.class
+com\validator\test.class
 com\beans\UserPost.class
 com\validator\LoginDataValidator.class
+com\validator\OTPVerifyController.class
 com\validator\LoginValidator.class
 com\validator\OTPvalidaterForEmail.class
 com\validator\RegistrationController.class
