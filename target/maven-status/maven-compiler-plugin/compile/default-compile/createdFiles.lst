@@ -7,11 +7,16 @@ com\validator\OTPvalidaterForEmail.class
 com\validator\RegistrationController.class
 com\response\beans\UserRegistrationResponse.class
 com\validator\PostUpload.class
+com\beans\Misc.class
 com\beans\OTPGenerater.class
 com\constants\AppContants.class
 com\beans\User.class
 com\constants\CommonErros.class
 com\dbutils\UserDAO.class
+com\validator\AddFriends.class
+com\validator\LoadFriends.class
+com\beans\JsonConverter.class
 com\validator\DataValidator.class
 com\dbutils\DBUtils.class
 com\validator\OTPvalidaterForEmail$1.class
+com\validator\ShowPosts.class

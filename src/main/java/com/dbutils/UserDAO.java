@@ -1,6 +1,7 @@
 package com.dbutils;
 
 import com.beans.User;
+import com.beans.UserPost;
 import com.constants.AppContants;
 import com.constants.CommonErros;
 import com.response.beans.UserRegistrationResponse;
@@ -222,16 +223,34 @@ public class UserDAO {
 
         return null;
     }
-    public static boolean makePost(User user){
+    public static int postCount(){
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
-        boolean result=false;
-        String QUERY = "insert into user_post values('"+user.getUserPost().getPostId()+"',"+user.getUserId()+",'"+user.getUserPost().getCaption()+"','"+user.getUserPost().getImage()+"','"+user.getUserPost().getLikes()+"','"+user.getUserPost().getComments()+"','"+user.getUserPost().getShares()+"','"+user.getUserPost().getDateOfPost()+"');";
+        String QUERY = "select count(*) from user_post;";
         con = DBUtils.getDbConnection();
         try {
             st = con.createStatement();
-            int row =  st.executeUpdate(QUERY);
+            rs = st.executeQuery(QUERY);
+            if(rs.next()){
+                return (rs.getInt(1)+1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return -1;
+    }
+    public static boolean makePost(User user){
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        boolean result=false;
+        String QUERY = "insert into user_post values('"+"post"+postCount()+"',"+user.getUserId()+",'"+user.getUserPost().getCaption()+"','"+user.getUserPost().getImage()+"','"+user.getUserPost().getLikes()+"','"+user.getUserPost().getComments()+"','"+user.getUserPost().getShares()+"','"+user.getUserPost().getDateOfPost()+"',null);";
+        con = DBUtils.getDbConnection();
+        try {
+            st = con.prepareStatement(QUERY);
+            int row =  st.executeUpdate();
             if(row>0){
                 return true;
             }
@@ -239,5 +258,85 @@ public class UserDAO {
             throw new RuntimeException(e);
         }
         return false;
+    }
+    public static ResultSet fetchPost(){
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        UserPost post = new UserPost();
+        String QUERY = "select * from user_post";
+        con = DBUtils.getDbConnection();
+        try {
+            st = con.prepareStatement(QUERY,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            rs = st.executeQuery();
+            if(rs.next()){
+                return rs;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+
+    }
+    public static User getUser(int userId){
+        User usr = new User();
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        UserPost post = new UserPost();
+        String QUERY = "select * from users where userId="+userId+";";
+        con = DBUtils.getDbConnection();
+        try {
+            st = con.createStatement();
+            rs = st.executeQuery(QUERY);
+            if(rs.next()){
+                usr.setUserId(rs.getInt(1));
+               usr.setUserName(rs.getString(3));
+               usr.setEmail(rs.getString(2));
+               usr.setGender(rs.getString(4));
+               usr.setDob(rs.getDate(5).toLocalDate());
+               return usr;
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return null;
+
+    }
+    public static ResultSet fetchFriends(){
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String QUERY = "select * from users";
+        con = DBUtils.getDbConnection();
+        try{
+            st = con.prepareStatement(QUERY,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            rs = st.executeQuery();
+            if(rs.next()){
+                return rs;
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }
+        return null;
+    }
+    public static String getUserDp(int userId){
+        Connection con = null;
+        Statement st = null;
+        ResultSet rs = null;
+        con = DBUtils.getDbConnection();
+
+        try{
+            st = con.createStatement();
+            rs = st.executeQuery("select imageUrl from dp_table where userId="+userId+";");
+            if(rs.next()){
+                return rs.getString(1);
+            }
+        }catch(SQLException se){
+            se.printStackTrace();
+        }
+        return null;
     }
 }
