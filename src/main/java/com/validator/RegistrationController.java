@@ -26,7 +26,9 @@ public class RegistrationController extends HttpServlet {
         String password=req.getParameter("password");
         String confirmPassword=req.getParameter("confirmPassword");
         LocalDate dob= LocalDate.parse(req.getParameter("birthdayDate"));
+
         UserRegistrationResponse response=new UserRegistrationResponse();
+
         if(confirmPassword.equals(password)){
             User user=new User(UserDAO.getCorrespondigId("users"),fName+" "+lName,gender,dob,email,password,null);
             if(DataValidator.validateUserData(user,response)){

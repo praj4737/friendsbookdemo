@@ -1,6 +1,8 @@
 package com.beans;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 public class UserPost {
@@ -11,6 +13,15 @@ public class UserPost {
     int comments;
     int shares;
     LocalDate dateOfPost;
+    LocalTime timeOfPost;
+
+    public LocalTime getTimeOfPost() {
+        return timeOfPost;
+    }
+
+    public void setTimeOfPost(LocalTime timeOfPost) {
+        this.timeOfPost = timeOfPost;
+    }
 
     public UserPost() {
 

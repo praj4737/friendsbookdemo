@@ -1,5 +1,6 @@
 package com.validator;
 
+import com.beans.JsonConverter;
 import com.beans.User;
 import com.constants.AppContants;
 import com.constants.CommonErros;
@@ -29,13 +30,18 @@ public class LoginValidator extends HttpServlet {
         email = req.getParameter("email");
         password = req.getParameter("password");
 
+        User user = UserDAO.getUser(email);
+
         if(email.matches(AppContants.EMAIL_REGEX)){
             if(UserDAO.LoginDao(email, password)){
                 response.setStatus(AppContants.SUCCESS_CODE);
                 HttpSession session = req.getSession();
-                User user = UserDAO.getUser(email);
+
                 session.setAttribute("user", user);
-                resp.sendRedirect("HomePage.jsp");
+                //convert the object to json and write it.
+
+                //end
+                resp.sendRedirect("homepage.jsp");
 
             }else{
                 response.setStatus(CommonErros.BAD_REQUEST);
@@ -56,5 +62,9 @@ public class LoginValidator extends HttpServlet {
             RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
             rd.forward(req, resp);
         }
+
+        user.setDob(null);
+        resp.setContentType("application/json");
+        resp.getWriter().write(JsonConverter.toJson(user));
     }
 }

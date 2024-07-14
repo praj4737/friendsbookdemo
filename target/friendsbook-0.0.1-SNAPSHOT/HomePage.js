@@ -1,29 +1,39 @@
+document.body.onload = setUser;
+function setUser(){
+    console.log("hy");
+    var usrData = getUserData();
+    var user = JsonToObjectConverter(usrData);
 
-function isScrolledToBottom() {
-    const scrollPosition = window.scrollY;
-    const windowHeight = window.innerHeight;
-    const documentHeight = document.body.scrollHeight;
-  
-    return (scrollPosition + windowHeight) >= document.body.scrollHeight;
-  }
-  
-  // Usage:
-  $(document).ready(() => {
-    // Similar logic as option 1 here
-    const isAtBottom = isScrolledToBottom();
-    if (isAtBottom) {
-      console.log("You've reached the bottom of the page on load!");
-      // Trigger action for initial content at bottom
-    }
-  
-    $(window).scroll(() => {
-      const isAtBottom = isScrolledToBottom();
-      if (isAtBottom) {
-        console.log("You've scrolled to the bottom of the page!");
-        // Trigger action for newly loaded content
-      }
-    });
-  });
+    var username = user.name;
+
+    this.document.getElementById("username").innerHTML = username;
+}
+
+
+async function getUserData(){
+    var usrData;
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST","http://localhost:8080/friendsbook/login",true);
+    xhr.setRequestHeader('Content-Type','application/json ; charset = UTF-8');
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState === 4 && xhr.status === 200){
+             usrData = xhr.responseText;
+             console.log(usrData);
+
+        }
+    };
+    xhr.send();
+
+    return usrData;
+}
+
+function JsonToObjectConverter(data)
+{
+    var obj = JSON.parse(data);
+
+    return obj;
+
+}
 
 function previewImage() {
     // Get the selected image file
@@ -55,4 +65,40 @@ function previewImage() {
         reader.readAsDataURL(imageFile);
     }
 }
+
+var firstTime = true
+
+function createElement(){
+
+    const originalElement = document.querySelector("#postcard");
+    const cloneElement = originalElement.cloneNode(true);
+    originalElement.after(cloneElement);
+
+}
+     
+
+function setPost(data){
+    console.log("reached on setPost");
+    console.log("fine till here");
+    // setPost(data);
+     var s = JSON.parse(data);
+     var postCaption = document.getElementById("postCaption");
+     var postImage = document.getElementById("postImage");
+     var likes = document.getElementById("likes");
+     var comments = document.getElementById("comments");
+     var shares = document.getElementById("shares");
+ 
+     postCaption.innerHTML = s.caption;
+     postImage.src = "images/PostImage.png";
+     console.log(s.image);
+     likes.innerHTML = s.likes;
+     comments.innerHTML = s.comments;
+     shares.innerHTML = s.shares;
+   
+}
+
+// Usage:
+
+
+
 
