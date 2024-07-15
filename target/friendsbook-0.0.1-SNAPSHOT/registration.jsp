@@ -37,6 +37,7 @@
                     $('#myForm').submit(function(event) {
                         event.preventDefault();
                         $("#error").hide();
+                        $("#loading").show();
                         $.ajax({
                             type: 'POST',
                             url: "registerUser",
@@ -62,14 +63,15 @@
                     console.log(data);
                         $.ajax({
                                                     type: 'POST',
-                                                    url: "otpVerify",
-                                                    data: data,
+                                                     url: "otpVerify",
+                                                    data: convertFormToJSON($("#otpForm")),
                                                     success: function (data) {
                                                         var response=$.parseJSON(data)
                                                         if(!(response.status === '200')){
                                                                 showErrorAlert(response.error);
                                                         }else if(response.status === '200'){
-                                                            $("#exampleModal").modal('show');
+                                                            alert("Registered Successfully");
+                                                            window.location.replace("uploadDp.jsp");
                                                         }
                                                     },
                                                     error: function (data) {
@@ -95,7 +97,14 @@
             <div class="col-12 col-lg-9 col-xl-7">
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
-                  <a href=""><h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><i class="fa fa-facebook">riendsBook</i></h3></a>
+                  <div class = "row">
+                    <div class = "col"> <a href=""><h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><i class="fa fa-facebook">riendsBook</i></h3></a></div>
+                    <div id="loading" class = "col" style="display: block">
+                      <div class = "spinner-border text-primary">
+
+                      </div>&nbsp;&nbsp;<b>Submitting Response Please Wait...</b>
+                    </div>
+                  </div>
                     <div class="alert alert-danger" role="alert" id="error" style="display:none">
 
                     </div>
@@ -218,12 +227,17 @@
               </button>
             </div>
             <div class="modal-body">
-              <input type="text" id="otp">
+            <form id="otpForm">
+              <input type="text" id="otp" name="otp">
+              </form>
             </div>
             <div class="modal-footer">
-            <a href="destination.html">
-              <button type="button" class="btn btn-primary" id="OTPVerify">Verify</button>
-              </a>
+
+              <button type="button" class="btn btn-primary" id="OTPVerify">Verify
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                <span class="visually-hidden">Loading...</span>
+              </button>
+
             </div>
           </div>
         </div>
