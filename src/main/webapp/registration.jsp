@@ -33,10 +33,11 @@
         <script>
 
             $(document).ready(function() {
-
+              $("#loading").hide();
                     $('#myForm').submit(function(event) {
                         event.preventDefault();
                         $("#error").hide();
+                      $("#loading").show();
                         $.ajax({
                             type: 'POST',
                             url: "registerUser",
@@ -62,7 +63,7 @@
                     console.log(data);
                         $.ajax({
                                                     type: 'POST',
-                                                    url: "otpVerify",
+                                                     url: "otpVerify",
                                                     data: convertFormToJSON($("#otpForm")),
                                                     success: function (data) {
                                                         var response=$.parseJSON(data)
@@ -96,7 +97,14 @@
             <div class="col-12 col-lg-9 col-xl-7">
               <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                 <div class="card-body p-4 p-md-5">
-                  <a href=""><h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><i class="fa fa-facebook">riendsBook</i></h3></a>
+                  <div class = "row">
+                    <div class = "col"> <a href=""><h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><i class="fa fa-facebook">riendsBook</i></h3></a></div>
+                    <div id="loading" class = "col">
+                      <div class = "spinner-border text-primary">
+
+                      </div>&nbsp;&nbsp;<b>Submitting Response Please Wait...</b>
+                    </div>
+                  </div>
                     <div class="alert alert-danger" role="alert" id="error" style="display:none">
 
                     </div>
@@ -225,7 +233,9 @@
             </div>
             <div class="modal-footer">
 
-              <button type="button" class="btn btn-primary" id="OTPVerify">Verify</button>
+              <button type="button" class="btn btn-primary" id="OTPVerify">Verify
+
+              </button>
 
             </div>
           </div>

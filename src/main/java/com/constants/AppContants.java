@@ -9,4 +9,5 @@ public class AppContants {
     public static final String SUCCESS_CODE="200";
     public static final String ALLOWED_TYPES="image/jpeg, image/png";
     public static final String PASSWORD_REGEX ="^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$";
+    public static final String REGISTRATION_OTP_MAIL_SUBJECT="OTP for Registration on FriendsBook";
 }

@@ -2,6 +2,7 @@ package com.validator;
 
 import com.beans.JsonConverter;
 import com.beans.OTPGenerater;
+import com.beans.SendEmail;
 import com.beans.User;
 import com.constants.AppContants;
 import com.constants.CommonErros;
@@ -42,8 +43,14 @@ public class RegistrationController extends HttpServlet {
             if(DataValidator.validateUserData(user,response)){
                 HttpSession session=req.getSession();
                 session.setAttribute("user",user);
+
+                //sending otp as email to the user trying to register.
                 String otp= OTPGenerater.generateOTP();
-                System.out.println(otp);
+                String content = "\n Here is the otp for your friendsBook registration \n"+"OTP: "+otp+"\n Do not share with anyone please.\n";
+                SendEmail.sendTo(user.getEmail(),AppContants.REGISTRATION_OTP_MAIL_SUBJECT,content);
+                //end.
+
+               // System.out.println(otp);
                 session.setAttribute("otp",otp);
                 response.setMessage("Verify through OTP");
                 response.setStatus(AppContants.SUCCESS_CODE);
