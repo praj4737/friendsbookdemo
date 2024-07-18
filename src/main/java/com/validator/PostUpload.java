@@ -1,9 +1,12 @@
 package com.validator;
 
+import com.beans.JsonConverter;
 import com.beans.User;
 import com.beans.UserPost;
 import com.constants.AppContants;
+import com.constants.CommonErros;
 import com.dbutils.UserDAO;
+import com.response.beans.PostUploadResponse;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,17 +26,21 @@ import java.time.LocalDate;
 public class PostUpload extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ((HttpServletResponse) resp).addHeader("Access-Control-Allow-Origin", req.getHeader("Origin"));
+        ((HttpServletResponse) resp).addHeader("Access-Control-Allow-Headers", "*");
+        ((HttpServletResponse) resp).addHeader("Access-Control-Allow-Methods",
+                "GET, OPTIONS, HEAD, PUT, POST, DELETE");
+
         User user = (User) req.getSession().getAttribute("user");
         if (user == null) {
             resp.sendRedirect("index.jsp");
         }
-        //let's set post details here
+
         UserPost post = new UserPost();
-        post.setPostId("post2");
+        PostUploadResponse response = new PostUploadResponse();
         post.setCaption(req.getParameter("caption"));
         post.setDateOfPost(LocalDate.now());
 
-        //post details setting end here
         Part part=req.getPart("picFile");
         String fileType=part.getContentType();
         if(AppContants.ALLOWED_TYPES.contains(fileType)) {
@@ -50,15 +57,19 @@ public class PostUpload extends HttpServlet {
                 fout = new FileOutputStream(path);
                 fout.write(images);
                 user.setDp(filename);
+
                 if(UserDAO.makePost(user)){
-                    resp.getWriter().println("Post is successfully uploaded");
+                   response.setStatus(AppContants.SUCCESS_CODE);
+                   response.setMessage("Successfully uploaded");
+
                 }else{
-                    resp.getWriter().println("Post upload failed");
+                    response.setError(CommonErros.BAD_REQUEST);
+                    response.setMessage("Upload failed");
 
                 }
 
             }catch (IOException e){
-                resp.getWriter().println("Something went wrong File can't be uploaded.");
+                e.printStackTrace();
             }finally {
                 try {
                     fout.flush();
@@ -69,8 +80,12 @@ public class PostUpload extends HttpServlet {
                 }
             }
         }else {
-            System.out.println("Not Allowed");
+            response.setError(CommonErros.INVALID_FILE_TYPE);
+            response.setMessage("Invalid file type");
         }
+
+        String jsonResponse = JsonConverter.toJson(response);
+        resp.getWriter().print(jsonResponse);
 
     }
     public static String getExtension(String type) {

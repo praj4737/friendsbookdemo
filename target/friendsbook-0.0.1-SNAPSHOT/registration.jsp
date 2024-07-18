@@ -33,11 +33,11 @@
         <script>
 
             $(document).ready(function() {
-
+              $("#loading").hide();
                     $('#myForm').submit(function(event) {
                         event.preventDefault();
                         $("#error").hide();
-                        $("#loading").show();
+                      $("#loading").show();
                         $.ajax({
                             type: 'POST',
                             url: "registerUser",
@@ -99,7 +99,7 @@
                 <div class="card-body p-4 p-md-5">
                   <div class = "row">
                     <div class = "col"> <a href=""><h3 class="mb-4 pb-2 pb-md-0 mb-md-5"><i class="fa fa-facebook">riendsBook</i></h3></a></div>
-                    <div id="loading" class = "col" style="display: block">
+                    <div id="loading" class = "col">
                       <div class = "spinner-border text-primary">
 
                       </div>&nbsp;&nbsp;<b>Submitting Response Please Wait...</b>
@@ -234,8 +234,7 @@
             <div class="modal-footer">
 
               <button type="button" class="btn btn-primary" id="OTPVerify">Verify
-                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                <span class="visually-hidden">Loading...</span>
+
               </button>
 
             </div>

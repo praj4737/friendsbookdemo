@@ -4,6 +4,7 @@ import com.beans.User;
 import com.beans.UserPost;
 import com.constants.AppContants;
 import com.constants.CommonErros;
+import com.response.beans.PostUploadResponse;
 import com.response.beans.UserRegistrationResponse;
 
 import java.sql.*;
@@ -337,6 +338,26 @@ public class UserDAO {
         }catch(SQLException se){
             se.printStackTrace();
         }
+        return null;
+    }
+
+    public static ResultSet getUsers(){
+        Connection con = null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        String query = "select * from users;";
+        con = DBUtils.getDbConnection();
+
+        try {
+            st = con.prepareStatement(query,ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
+            rs = st.executeQuery();
+            if(rs.next()){
+                return rs;
+            }
+        }catch (SQLException se){
+            se.printStackTrace();
+        }
+
         return null;
     }
 }

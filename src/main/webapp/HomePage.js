@@ -1,43 +1,8 @@
-document.body.onload = setUser;
-function setUser(){
-    console.log("hy");
-    var usrData = getUserData();
-    var user = JsonToObjectConverter(usrData);
-
-    var username = user.name;
-
-    this.document.getElementById("username").innerHTML = username;
-}
-
-
-async function getUserData(){
-    var usrData;
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST","http://localhost:8080/friendsbook/login",true);
-    xhr.setRequestHeader('Content-Type','application/json ; charset = UTF-8');
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState === 4 && xhr.status === 200){
-             usrData = xhr.responseText;
-             console.log(usrData);
-
-        }
-    };
-    xhr.send();
-
-    return usrData;
-}
-
-function JsonToObjectConverter(data)
-{
-    var obj = JSON.parse(data);
-
-    return obj;
-
-}
 
 function previewImage() {
     // Get the selected image file
     const imageFile = document.getElementById('dpFile').files[0];
+    console.log(imageFile.name);
 
     // Check if a file is selected
     if (imageFile) {
@@ -63,41 +28,94 @@ function previewImage() {
 
         // Read the image as a data URL
         reader.readAsDataURL(imageFile);
+        
     }
 }
 
-var firstTime = true
-
-function createElement(){
-
-    const originalElement = document.querySelector("#postcard");
-    const cloneElement = originalElement.cloneNode(true);
-    originalElement.after(cloneElement);
-
+function convertFormToJSON(form) {
+    const array = $(form).serializeArray();
+    const json = {};
+    $.each(array, function() {
+        json[this.name] = this.value || ""; // Assign field name as key and value as value
+    });
+    console.log(json);
+    return json;
 }
-     
+function isFormField(form){
+    const array = $(form).serializeArray();
+    var isValid=true;
+    $.each(array, function() {
+            if(!this.value.trim().length >0){
+                isValid=false;
 
-function setPost(data){
-    console.log("reached on setPost");
-    console.log("fine till here");
-    // setPost(data);
-     var s = JSON.parse(data);
-     var postCaption = document.getElementById("postCaption");
-     var postImage = document.getElementById("postImage");
-     var likes = document.getElementById("likes");
-     var comments = document.getElementById("comments");
-     var shares = document.getElementById("shares");
- 
-     postCaption.innerHTML = s.caption;
-     postImage.src = "images/PostImage.png";
-     console.log(s.image);
-     likes.innerHTML = s.likes;
-     comments.innerHTML = s.comments;
-     shares.innerHTML = s.shares;
-   
+            }
+        });
+        return isValid;
 }
 
-// Usage:
+      $(document).ready(function (){
+       
+          $("#postForm").submit(function (event){
+              event.preventDefault();
+              $.ajax({
+                  type: 'POST',
+                  url: "postupload",
+                  data:new FormData(this),
+                  processData: false,
+                  contentType: false,
+                  success: function (data) {
+                      var response=$.parseJSON(data)
+                      console.log(response);
+                      if(!(response.status === '200')){
+                          showErrorAlert(response.error);
+                      }else if(response.status === '200'){
+                          alert("post uploaded successfully.")
+                      }
+                  },
+                  error: function (data) {
+                      alert(data);
+                      console.log(data);
+                      alert("error");
+                  }
+              });
+          });
+      });
+
+
+      $(window).scroll(function() {
+    var windowHeight = $(window).height();
+    var documentHeight = $(document).height();
+    var scrollPosition = $(window).scrollTop();
+
+    if (scrollPosition + windowHeight >= documentHeight) {
+        // Display your message or perform any other action
+        console.log("You've reached the end of the page!");
+        $("#post").append('<div class="col-lg-6 text-white col-centered d-block p-2" >'
+          +'<div class="card">'
+            +'<div class="card-header">'
+              +'<img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">'
+              +' <span class="ms-2">PRaj</span>'
+              +' </div>'
+              +' <div class="card-body">'
+                +'  <h5 class="card-title">sdfghe treatment</h5>'
+                +' <p class="card-text">'
+                  +' <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">'
+
+                  +'</p>'
+                  +'<div class = "d-flex flex-row">'
+                    +' <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>'
+                    +'<div class = "mt-2 ms-1">Like</div>'
+                    +'<div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>'
+                    +'<div class = "mt-2 ms-1">comment</div>'
+                    +'<div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>'
+                    +'<div class = "mt-2 ms-1">Share</div>'
+                    +'</div>'
+                    +' </div>'
+                    +'</div>'
+                    +' </div>');
+
+    }
+});
 
 
 
