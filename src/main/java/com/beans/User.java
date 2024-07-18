@@ -22,6 +22,15 @@ public class User {
         this.password = password;
         this.dp = dp;
     }
+    public void populateBasicUserInfo(int userId, String userName, String gender, LocalDate dob, String email, String dp) {
+        this.userId = userId;
+        this.userName = userName;
+        this.gender = gender;
+        this.dob = dob;
+        this.email = email;
+        this.password = password;
+        this.dp = dp;
+    }
 
     public int getUserId() {
         return userId;

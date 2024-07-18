@@ -21,10 +21,10 @@
 <body>
 
 <jsp:include page="header.jsp" />
+<h2>Friends Requests</h2><hr>
+<div class="container mt-5 overflow-auto " style="width:100%; max-height:23rem;">
 
-<div class="container mt-5">
-  <h2>Friends Requests</h2><hr>
-<div class="row" id="friend-requets">
+<div class="row justify-content-center" id="friend-requets">
 
   <div class="col-sm-2 ms-2 mt-2" style="width: 15rem;">
     <div class = "card " style="width: 15rem;">
@@ -37,6 +37,7 @@
       </div>
    </div>
   </div>
+
   
 <!--akhfcidhfew-->
 
@@ -46,13 +47,13 @@
 
 
 <!--People you may know-->
+ <h2>People You may know</h2><hr>
+<div class="container mt-5 overflow-auto" style="width:100%; max-height:23rem;">
 
-<div class="container mt-5">
-  <h2>People You may know</h2><hr>
   <!--
   
   -->
-<div class="row" id="friends">
+<div class="row justify-content-center" id="friends">
 
     <div class="col-sm-2 ms-2 mt-2" style="width: 15rem;">
     <div class = "card " style="width: 15rem;">
@@ -65,7 +66,6 @@
       </div>
    </div>
   </div>
-
   
 </div>
 

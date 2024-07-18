@@ -5,7 +5,7 @@ $(document).ready(function() {
     var documentHeight = $(document).height();
     var scrollTop = $(window).scrollTop();
   
-    $.ajax({
+   /* $.ajax({
       type: 'POST',
       url: "addfriends",
       success: function (data) {
@@ -34,7 +34,7 @@ $(document).ready(function() {
           console.log(data);
           alert("error");
       }
-  });
+  });*/
 
 
   });

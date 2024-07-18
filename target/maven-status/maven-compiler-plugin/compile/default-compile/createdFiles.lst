@@ -2,6 +2,7 @@ com\response\beans\PostUploadResponse.class
 com\validator\DpUploadServlet.class
 com\validator\LoginValidator.class
 com\validator\OTPvalidaterForEmail.class
+com\dbutils\PostDAO.class
 com\miscellaneous\SendEmail$1.class
 com\validator\RegistrationController.class
 com\beans\Misc.class
@@ -9,6 +10,7 @@ com\beans\User.class
 com\constants\CommonErros.class
 com\dbutils\UserDAO.class
 com\validator\AddFriends.class
+com\dbutils\FriendsDAO.class
 com\validator\OTPvalidaterForEmail$1.class
 com\response\beans\UserLoginResponse.class
 com\validator\test.class
@@ -20,8 +22,10 @@ com\response\beans\UserRegistrationResponse.class
 com\validator\PostUpload.class
 com\beans\OTPGenerater.class
 com\constants\AppContants.class
+com\response\beans\PeoperYouMayKnowResponse.class
 com\validator\LoadFriends.class
 com\beans\JsonConverter.class
 com\validator\DataValidator.class
+com\validator\ListPeopleYouMayKnow.class
 com\dbutils\DBUtils.class
 com\validator\ShowPosts.class
