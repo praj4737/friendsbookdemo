@@ -2,13 +2,12 @@ package com.validator;
 
 import com.beans.JsonConverter;
 import com.beans.OTPGenerater;
-import com.beans.SendEmail;
+import com.miscellaneous.SendEmail;
 import com.beans.User;
 import com.constants.AppContants;
 import com.constants.CommonErros;
 import com.dbutils.UserDAO;
 import com.response.beans.UserRegistrationResponse;
-import com.validator.DataValidator;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,7 +17,6 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.regex.Pattern;
 
 @WebServlet("/registerUser")
 public class RegistrationController extends HttpServlet {

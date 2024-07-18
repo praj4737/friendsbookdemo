@@ -10,5 +10,5 @@ public class CommonErros {
     public static final String BAD_REQUEST="400";
     public static final String LOGIN_FAILED="LOGIN_FAILED";
     public static final String PASSWORD_STANDARD_ERROR = "PASSWORD IS NOT STRONG";
-
+    public static final String INVALID_FILE_TYPE = "INVALID FILE TYPE";
 }

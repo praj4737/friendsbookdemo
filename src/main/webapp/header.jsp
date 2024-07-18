@@ -26,27 +26,29 @@
     <a class="navbar-brand" href="#">
           <img src="usersDp/<%= user.getDp()%>" alt="Logo" style="width:40px;" class="rounded-pill">
         </a>
-        <span class="ms-2"><% out.print(user.getUserName()); %></span>
+        <span class="ms-2"><%= user.getUserName() %></span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsibleNavbar" >
       <ul class="navbar-nav">
-        <li class="nav-item">
+        <li class="nav-item ms-5">
           <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">New Post</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item ms-5">
+          <a class="nav-link" href="makefriends.jsp">Add friends</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+        <li class="nav-item ms-5">
+          <a class="nav-link" href="#">Func..</a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Dropdown</a>
+        <li class="nav-item dropdown ms-5">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+            <img src="" alt="..." style="height: 30px;width: 30px;">
+          </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">New Post</a></li>
-            <li><a class="dropdown-item" href="#">Another link</a></li>
-            <li><a class="dropdown-item" href="#">A third link</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">Profile</a></li>
+            <li><a class="dropdown-item" href="#">setting</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
           </ul>
         </li>
       </ul>

@@ -17,21 +17,5 @@ public class LoadFriends extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        String json= null;
-        User users[] = null;
-        users = new Misc().getUser();
-
-        int count = 0;
-
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-
-              json = mapper.writeValueAsString(users);
-
-
-        }catch (JsonProcessingException jpe){
-            jpe.printStackTrace();
-        }
-        resp.getWriter().write(json);
     }
 }

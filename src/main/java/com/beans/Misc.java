@@ -4,6 +4,8 @@ import com.dbutils.UserDAO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Misc {
 
@@ -47,8 +49,8 @@ public class Misc {
 
         return posts;
     }
-    public User[] getUser(){
-        User[] users = null;
+    public ArrayList<User> getUser(){
+       ArrayList<User> users = null;
         ResultSet rs = null;
         int numberOfUsers = 0;
         int i=0;
@@ -58,13 +60,13 @@ public class Misc {
             rs.last();
             numberOfUsers = rs.getRow();
             rs.first();
-            users = new User[numberOfUsers];
+            users = new ArrayList<>();
 
             while(i!= numberOfUsers ) {
                 user.setUserId(rs.getInt(1));
                 user.setUserName(rs.getString(3));
                 user.setDp(UserDAO.getUserDp(user.getUserId()));
-                users[i] = user;
+                users.add(user);
                 i+=1;
             }
         } catch (SQLException e) {
