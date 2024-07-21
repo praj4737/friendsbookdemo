@@ -26,7 +26,8 @@
 
 <div class="row justify-content-center" id="friend-requets">
 
-  <div class="col-sm-2 ms-2 mt-2" style="width: 15rem;">
+  <!--
+    <div class="col-sm-2 ms-2 mt-2" style="width: 15rem;">
     <div class = "card " style="width: 15rem;">
       <img class = "card-img-top" src="images/PostImage.png" alt="...">
       <div class="card-body">
@@ -37,6 +38,8 @@
       </div>
    </div>
   </div>
+
+  -->
 
   
 <!--akhfcidhfew-->
@@ -54,8 +57,8 @@
   
   -->
 <div class="row justify-content-center" id="friends">
-
-    <div class="col-sm-2 ms-2 mt-2" style="width: 15rem;">
+<!--
+ <div class="col-sm-2 ms-2 mt-2" style="width: 15rem;">
     <div class = "card " style="width: 15rem;">
       <img class = "card-img-top" src="images/PostImage.png" alt="...">
       <div class="card-body">
@@ -65,7 +68,9 @@
         <button class="btn btn-secondary">Remove</button>
       </div>
    </div>
-  </div>
+  </div>  
+-->
+   
   
 </div>
 

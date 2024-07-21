@@ -10,4 +10,11 @@ public class AppContants {
     public static final String ALLOWED_TYPES="image/jpeg, image/png";
     public static final String PASSWORD_REGEX ="^(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&#])[A-Za-z\\d@$!%*?&#]{8,}$";
     public static final String REGISTRATION_OTP_MAIL_SUBJECT="OTP for Registration on FriendsBook";
+    public static final String FRIEND_REQUEST_SENT = "FRIEND REQUEST SENT SUCCESSFULLY";
+    public static final String FRIEND_REQUEST_REVOKED = "FRIEND REQUEST REVOKED SUCCESSFULLY";
+    public static final String ADD_FRIEND = "Add Friend";
+    public static final String REQUEST_SENT = "Request Sent";
+    public static final String OK = "ok";
+    public static final String FRIEND_REQUEST_ACCEPTED = "friend request accepted";
+    public static final String FRIENDS = "Friends";
 }

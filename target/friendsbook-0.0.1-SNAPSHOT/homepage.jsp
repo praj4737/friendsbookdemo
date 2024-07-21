@@ -57,266 +57,60 @@
 
 
     <!--Post display-->
-   <div class="container-fluid mt-3">
+   
 
-    <div class="container-fluid" >
-      <div class="col" id="post">
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
+    <div id="post" class="d-flex flex-column align-items-center justify-content-center">
+      
+        
+        <div class="card mt-3" style="width: 30rem;">
+          <div class="card-header">
+            <a href="#"><img src="usersDp/usrdp12.jpg" alt="User Profile" class="" width="40" height="40" style="float: left;border-radius: 30%;border: 1px solid black;"></a>
+            <span class="ms-2">Username</span>
+          </div>
+          <img src="images/usrpost4.png" class="card-img-top" alt="..." style="width: 30rem;height: 20rem;">
+          <div class="card-body">
+            <div class = "d-flex flex-row">
+              <div class = "">0 Likes</div>
+              <div class = " ms-5">0 Comments</div>
+             </div>
+            <hr>
+           <div class = "d-flex flex-row">
+                <div class = ""><a href=""><i class = "material-icons">thumb_up</i></a></div>
+                <div class = " ms-1">Like</div>
+                <div class = " ms-5"><a href=""><i class = "material-icons">comment</i></a></div>
+                <div class = " ms-1">comment</div>
                </div>
-            </div>
           </div>
         </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
+       
+        <!--Tesing code-->
+        <div class="card mt-3" style="width: 30rem;">
+          <div class="card-header">
+            <a href="#"><img src="usersDp/usrdp12.jpg" alt="User Profile" class="" width="40" height="40" style="float: left;border-radius: 30%;border: 1px solid black;"></a>
+            <span class="ms-2">Username</span>
+          </div>
+          <img src="images/usrpost4.png" class="card-img-top" alt="..." style="width: 30rem;height: 20rem;">
+          <div class="card-body">
+            <div class = "d-flex flex-row">
+              <div class = "">0 Likes</div>
+              <div class = " ms-5">0 Comments</div>
+             </div>
+            <hr>
+           <div class = "d-flex flex-row">
+                <div class = ""><a href=""><i class = "material-icons">thumb_up</i></a></div>
+                <div class = " ms-1">Like</div>
+                <div class = " ms-5"><a href=""><i class = "material-icons">comment</i></a></div>
+                <div class = " ms-1">comment</div>
                </div>
-            </div>
           </div>
         </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
 
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
+        
+        <!--Tesing code-->
 
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-        <!--Post 1 start-->
-        <div class="col-lg-6 text-white col-centered d-block p-2" >
-          <div class="card">
-            <div class="card-header">
-              <img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">
-              <span class="ms-2">PRaj</span>
-            </div>
-            <div class="card-body">
-              <h5 class="card-title">sdfghe treatment</h5>
-              <p class="card-text">
-                <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">
-
-              </p>
-              <div class = "d-flex flex-row">
-                <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>
-                <div class = "mt-2 ms-1">Like</div>
-                <div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>
-                <div class = "mt-2 ms-1">comment</div>
-                <div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>
-                <div class = "mt-2 ms-1">Share</div>
-               </div>
-            </div>
-          </div>
-        </div>
-        <!--Post 1 end-->
-
-
-
-      </div>
+     
     </div>
-  </div>
+  
 <script src="HomePage.js"></script>
 </body>
 </html>

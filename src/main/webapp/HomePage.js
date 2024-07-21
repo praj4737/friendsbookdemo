@@ -81,41 +81,75 @@ function isFormField(form){
           });
       });
 
+    
 
-      $(window).scroll(function() {
-    var windowHeight = $(window).height();
-    var documentHeight = $(document).height();
-    var scrollPosition = $(window).scrollTop();
+      $(document).ready(function(){
+        var offset =0;
+        var loading = false;
+        $(window).on('scroll', function() {
+            var windowHeight = $(window).height();
+            var documentHeight = $(document).height();
+            var scrollPosition = $(window).scrollTop();
+    
+            if (scrollPosition + windowHeight >= documentHeight - 100) { 
+               
+                if (loading) return;
+                loading = true;
 
-    if (scrollPosition + windowHeight >= documentHeight) {
-        // Display your message or perform any other action
-        console.log("You've reached the end of the page!");
-        $("#post").append('<div class="col-lg-6 text-white col-centered d-block p-2" >'
-          +'<div class="card">'
-            +'<div class="card-header">'
-              +'<img src="usersDp/usrdp12.jpg" alt="User Profile" class="rounded-circle" width="40" height="40" style="float: left;">'
-              +' <span class="ms-2">PRaj</span>'
-              +' </div>'
-              +' <div class="card-body">'
-                +'  <h5 class="card-title">sdfghe treatment</h5>'
-                +' <p class="card-text">'
-                  +' <img src="images/PostImage.png" class="img-fluid" alt="..." style="max-width: 400px; max-height: 300px;">'
+                $.ajax({
 
-                  +'</p>'
-                  +'<div class = "d-flex flex-row">'
-                    +' <div class = "mt-2"><a href=""><i class = "material-icons">thumb_up</i></a></div>'
-                    +'<div class = "mt-2 ms-1">Like</div>'
-                    +'<div class = "mt-2 ms-4"><a href=""><i class = "material-icons">comment</i></a></div>'
-                    +'<div class = "mt-2 ms-1">comment</div>'
-                    +'<div class = "mt-2 ms-4"><a href=""><i class="material-icons">share</i></a></div>'
-                    +'<div class = "mt-2 ms-1">Share</div>'
-                    +'</div>'
-                    +' </div>'
-                    +'</div>'
-                    +' </div>');
-
-    }
-});
+                    type: 'POST',
+                    url: "fetchpost",
+                    data: {offset: offset},
+                    success: function (data) {
+                       var response = JSON.parse(data);
+                       var items = JSON.parse(response.data);
+                       console.log(items);
+                        if(items.length>0){
+                           items.forEach(item => {
+                    
+              
+                        $("#post").append('<div class="card mt-3" style="width: 30rem;">'+
+                            '<div class="card-header">'+
+                              '<a href="#"><img src="" alt="User Profile" class="" width="40" height="40" style="float: left;border-radius: 30%;border: 1px solid black;"></a>'+
+                              '<span class="ms-2">'+item.username+'</span>'+
+                            '</div>'+
+                            '<img src="'+item.image+'" class="card-img-top" alt="..." style="width: 30rem;height: 20rem;">'+
+                            '<div class="card-body">'+
+                              '<div class = "d-flex flex-row">'+
+                                '<div class = "">'+item.likes+' Likes</div>'+
+                                '<div class = " ms-5">'+item.comments+' comments</div>'+
+                               '</div>'+
+                              '<hr>'+
+                             '<div class = "d-flex flex-row">'+
+                                  '<div class = ""><a href=""><i class = "material-icons">thumb_up</i></a></div>'+
+                                 ' <div class = " ms-1">Like</div>'+
+                                  '<div class = " ms-5"><a href=""><i class = "material-icons">comment</i></a></div>'+
+                                  '<div class = " ms-1">comment</div>'+
+                                 '</div>'+
+                            '</div>'+
+                          '</div>');
+              
+                       
+                       
+                      });
+                      offset+=10;
+                      loading = false;
+                    }else{
+                        $(window).off('scroll');
+                    }
+                    },
+                    error: function (data) {
+                        alert(data);
+                        console.log(data);
+                        loading = false;
+                    }
+                });
+            
+            }
+        });
+        
+      });
 
 
 
