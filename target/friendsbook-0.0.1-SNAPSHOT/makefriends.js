@@ -17,7 +17,7 @@ $(document).ready(function() {
                  '<h5 class="card-title">'+item.userName+'</h5>'+
                  '<p class="card-text" id="reqStatus"></p>'+
                  '<button class = "confirm btn btn-primary " data-id="'+item.userId+'">confirm</button>'+
-                 '<button class="btn btn-secondary remove">Delete</button>'+
+                 ''+
                  '</div>'+
                  '</div>'+
                  '</div>');
@@ -43,7 +43,7 @@ $(document).ready(function() {
            console.log(items);
 
           items.forEach(item => {
-        
+
   
               $("#friends").append('<div class="request col-sm-2 ms-2 mt-2" style="width: 15rem;">'+
                 ' <div class = "card " style="width: 15rem;">'+
@@ -125,7 +125,7 @@ $(document).ready(function() {
 });
 
   
-$(document).on('click', '.remove-', function() {
+$(document).on('click', '.remove', function() {
   $(this).closest('.request').hide();
 });
 

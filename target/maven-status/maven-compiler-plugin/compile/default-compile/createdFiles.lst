@@ -19,9 +19,11 @@ com\response\beans\AcceptFriendRequestResponse.class
 com\response\beans\UserLoginResponse.class
 com\validator\test.class
 com\miscellaneous\SendEmail.class
+com\response\beans\LoggedInUserBeans.class
 com\beans\UserPost.class
 com\validator\LoginDataValidator.class
 com\validator\OTPVerifyController.class
+com\response\beans\UserLoginRequest.class
 com\response\beans\ShowPostResponse.class
 com\validator\ListFriendRequests.class
 com\response\beans\UserRegistrationResponse.class
@@ -34,5 +36,6 @@ com\validator\LoadFriends.class
 com\beans\JsonConverter.class
 com\validator\DataValidator.class
 com\validator\ListPeopleYouMayKnow.class
+com\validator\UserAuthFilter.class
 com\dbutils\DBUtils.class
 com\validator\ShowPosts.class

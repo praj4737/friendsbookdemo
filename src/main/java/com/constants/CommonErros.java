@@ -3,6 +3,7 @@ package com.constants;
 public class CommonErros {
     public static final String INVALID_NAME="Invalid Name";
     public static final String INVALID_EMAIL="Invalid Email";
+    public static final String EMAIL_NOT_REGISTERED="EMAIL_NOT_REGISTERED";
     public static final String EMAIL_ALREADY_EXIST="EMAIL_ALREADY_EXIST";
     public static final String PASSWORD_NOT_MATCHED="PASSWORD_NOT_MATCHED";
     public static final String UNABLE_TO_REGISTER_USER="UNABLE_TO_REGISTER_USER";
@@ -15,4 +16,6 @@ public class CommonErros {
     public static final String FRIEND_REQUEST_NOT_REVOKED = "FRIEND_REQUEST_REVOKE FAILED";
     public static final String FAILED = "failed";
     public static final String FRIEND_REQUEST_ACCEPTING_FAILED = "FRIEND_REQUEST_ACCEPTING_FAILED";
+    public static final String USER_AND_PASSWORD_NOT_CORRECT="USER_AND_PASSWORD_NOT_CORRECT";
+    public static final String EXCEPTION_THROWN ="EXCEPTION_THROWN";
 }

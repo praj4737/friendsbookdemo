@@ -1,12 +1,22 @@
 package com.response.beans;
 
+import com.beans.User;
+
 public class UserLoginResponse {
     private String error;
     private String status;
     private String message;
+    private com.beans.User User;
   //  private int userId;
 
 
+    public User getUser() {
+        return User;
+    }
+
+    public void setUser(User user) {
+        User = user;
+    }
 
     public String getError() {
         return error;

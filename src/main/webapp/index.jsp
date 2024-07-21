@@ -1,3 +1,6 @@
+<%@page import="com.response.beans.UserLoginResponse"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +17,7 @@
     <!-- Login 13 - Bootstrap Brain Component -->
 <section class="bg-light py-3 py-md-5">
     <div class="container">
+    <div class="container">
       <div class="row justify-content-center">
         <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
           <div class="card border border-light-subtle rounded-3 shadow-sm">
@@ -24,6 +28,19 @@
                 </a>
               </div>
               <h2 class="fs-6 fw-normal text-center text-secondary mb-4">Sign in to your account</h2>
+             <%
+             try{
+                UserLoginResponse userLoginResponse = (UserLoginResponse)session.getAttribute("loginResponse");
+             	String error=(userLoginResponse!=null)?userLoginResponse.getError():null;
+             	String display=(userLoginResponse!=null)?"block":"none";
+                out.print(" <div class=\"alert alert-danger\" role=\"alert\" id=\"error\" style=\"display:"+display+"\">"+
+                		error
+                		+"</div>");
+                	}catch(Exception e){
+                	out.println(e);
+                	}
+
+             %>
               <form action="login" method="post">
                 <div class="row gy-2 overflow-hidden">
                   <div class="col-12">

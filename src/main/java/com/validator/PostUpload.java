@@ -51,7 +51,7 @@ public class PostUpload extends HttpServlet {
                 fin = part.getInputStream();
                 byte[] images = new byte[fin.available()];
                 fin.read(images);
-                String path="C:\\\\friendsbookdemo\\\\src\\\\main\\\\webapp\\\\images\\\\"+filename;
+                String path="C:\\\\maven_projects\\\\friendsbookdemo\\\\src\\\\main\\\\webapp\\\\images\\\\"+filename;
                 post.setImage(path);
                 user.setUserPost(post);
                 fout = new FileOutputStream(path);

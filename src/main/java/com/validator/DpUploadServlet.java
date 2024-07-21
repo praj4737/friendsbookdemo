@@ -43,6 +43,8 @@ public class DpUploadServlet extends HttpServlet {
                     resp.getWriter().println("image not  saved to database");
 
                 }
+                user.setDp(AppContants.USER_DP_BASE_ADDR+user.getDp());
+
 
             }catch (IOException e){
                 resp.getWriter().println("Something went wrong File can't be uploaded.");

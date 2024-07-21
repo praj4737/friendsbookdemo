@@ -43,7 +43,7 @@ $(document).ready(function() {
            console.log(items);
 
           items.forEach(item => {
-        
+
   
               $("#friends").append('<div class="request col-sm-2 ms-2 mt-2" style="width: 15rem;">'+
                 ' <div class = "card " style="width: 15rem;">'+

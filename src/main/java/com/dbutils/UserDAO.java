@@ -5,6 +5,8 @@ import com.beans.UserPost;
 import com.constants.AppContants;
 import com.constants.CommonErros;
 import com.response.beans.PostUploadResponse;
+import com.response.beans.UserLoginRequest;
+import com.response.beans.UserLoginResponse;
 import com.response.beans.UserRegistrationResponse;
 
 import java.sql.*;
@@ -120,13 +122,6 @@ public class UserDAO {
         }
     }
 
-    public static String[] generateQuery(User user){
-        String[] query=new String[2];
-        user.setUserId(UserDAO.getCorrespondigId("users")+1);
-        query[0]="insert into users values("+user.getUserId()+",'"+user.getEmail()+"','"+user.getUserName()+"','"+user.getGender()+"','"+user.getDob()+"');";
-        query[1]="insert into creds values("+(UserDAO.getCorrespondigId("creds")+1)+","+user.getUserId()+",'"+user.getPassword()+"','"+ LocalDate.now()+"',null);";
-        return query;
-    }
     public static boolean dpUploaddao(User user) {
         Connection con=DBUtils.getDbConnection();
         Statement st=null;
@@ -144,38 +139,46 @@ public class UserDAO {
         }
         return false;
     }
-    public static boolean LoginDao(String email, String password){
-
+    public static void LoginDao(UserLoginRequest loginRequest, UserLoginResponse loginResponse){
+        String userEmail=loginRequest.getEmail();
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
 
-        if(isEmailExistInDB(email)){
-            int userId = getUserId(email);
-            if(userId!=-1){
-                con=DBUtils.getDbConnection();
-                String QUERY  = "select password from creds where userId="+userId+";";
+        if(userEmail!=null && isEmailExistInDB(userEmail)){
+            con=DBUtils.getDbConnection();
+            String QUERY  = "select  userId from creds where userId " +
+                    "=(select userId from users where email='"+loginRequest.getEmail()+"') " +
+                    "and password='"+loginRequest.getPassword()+"'";
+            try {
+                st = con.createStatement();
+                rs = st.executeQuery(QUERY);
+                if(rs!=null && rs.next()){
+                    int userId=rs.getInt(1);
+                    loginResponse.setUser(getUser(userId));
+                    loginResponse.setStatus(AppContants.SUCCESS_CODE);
+                }else{
+                    loginResponse.setError(CommonErros.USER_AND_PASSWORD_NOT_CORRECT);
+                    loginResponse.setStatus(CommonErros.BAD_REQUEST);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                loginResponse.setError(CommonErros.EXCEPTION_THROWN);
+                loginResponse.setStatus(CommonErros.BAD_REQUEST);
+            }finally {
                 try {
-                    st = con.createStatement();
-                    rs = st.executeQuery(QUERY);
-                    if(rs.next()){
-                        //return true;
-                        if(rs.getString(1).equals(password)){
-                            return true;
-                        }else{
-                            return false;
-                        }
-                    }else{
-                        return false;
-                    }
+                    con.close();
+                    st.close();
+                    rs.close();
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
+                }catch (NullPointerException e){
+
                 }
-            }else{
-                return false;
             }
         }else{
-            return false;
+            loginResponse.setError(CommonErros.EMAIL_NOT_REGISTERED);
+            loginResponse.setStatus(CommonErros.BAD_REQUEST);
         }
 
 
@@ -286,17 +289,20 @@ public class UserDAO {
         Statement st = null;
         ResultSet rs = null;
         UserPost post = new UserPost();
-        String QUERY = "select * from users where userId="+userId+";";
+        String QUERY = "select u.userId,u.email,u.name,u.gender,u.dob,dp.imageUrl from users u\n" +
+                "join dp_table dp on dp.userId=u.userId\n" +
+                "where u.userId="+userId;
         con = DBUtils.getDbConnection();
         try {
             st = con.createStatement();
             rs = st.executeQuery(QUERY);
             if(rs.next()){
                 usr.setUserId(rs.getInt(1));
+                usr.setEmail(rs.getString(2));
                usr.setUserName(rs.getString(3));
-               usr.setEmail(rs.getString(2));
                usr.setGender(rs.getString(4));
                usr.setDob(rs.getDate(5).toLocalDate());
+               usr.setDp(AppContants.USER_DP_BASE_ADDR+rs.getString(6));
                return usr;
             }
         } catch (SQLException e) {

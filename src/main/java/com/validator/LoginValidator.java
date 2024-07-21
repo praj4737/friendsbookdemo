@@ -5,6 +5,7 @@ import com.beans.User;
 import com.constants.AppContants;
 import com.constants.CommonErros;
 import com.dbutils.UserDAO;
+import com.response.beans.UserLoginRequest;
 import com.response.beans.UserLoginResponse;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -22,49 +23,39 @@ public class LoginValidator extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         PrintWriter out = resp.getWriter();
-        UserLoginResponse response = new UserLoginResponse();
+
 
         String email = null;
         String password = null;
 
         email = req.getParameter("email");
         password = req.getParameter("password");
+        UserLoginResponse loginResponse=null;
+        HttpSession session = req.getSession();
+        if(email!=null && email.matches(AppContants.EMAIL_REGEX) && password!=null && password.length()>7){
+            UserLoginRequest loginRequest=new UserLoginRequest(email,password);
+            loginResponse=new UserLoginResponse();
+            UserDAO.LoginDao(loginRequest,loginResponse);
+            if(loginResponse.getStatus()==AppContants.SUCCESS_CODE){
 
-        User user = UserDAO.getUser(email);
 
-        if(email.matches(AppContants.EMAIL_REGEX)){
-            if(UserDAO.LoginDao(email, password)){
-                response.setStatus(AppContants.SUCCESS_CODE);
-                HttpSession session = req.getSession();
-
-                session.setAttribute("user", user);
-                //convert the object to json and write it.
+                session.setAttribute("user", loginResponse.getUser());
 
                 //end
-                resp.sendRedirect("homepage.jsp");
+                req.getRequestDispatcher("homepage.jsp").forward(req,resp);
 
-            }else{
-                response.setStatus(CommonErros.BAD_REQUEST);
-                response.setError(CommonErros.LOGIN_FAILED);
-                req.setAttribute("response",response);
-                RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-                rd.forward(req, resp);
+            }else
+                session.setAttribute("loginResponse",loginResponse);
+
+            }else {
+                session.setAttribute("loginResponse",loginResponse);
             }
-           // if(password.matches(AppContants.PASSWORD_REGEX)){
-           //     out.println("password and email is valid atleast.");
-            // }else{
-             //   out.println("password is invalid");
-          //  }
-        }else{
-            response.setStatus(CommonErros.BAD_REQUEST);
-            response.setError(CommonErros.INVALID_EMAIL);
-            req.setAttribute("response",response);
-            RequestDispatcher rd = req.getRequestDispatcher("index.jsp");
-            rd.forward(req, resp);
+
+            req.getRequestDispatcher("index.jsp").include(req,resp);
         }
 
-        user.setDob(null);
-        resp.setContentType("application/json");
-        resp.getWriter().write(JsonConverter.toJson(user));
+
+
+
     }
-}
+

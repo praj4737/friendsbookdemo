@@ -17,4 +17,6 @@ public class AppContants {
     public static final String OK = "ok";
     public static final String FRIEND_REQUEST_ACCEPTED = "friend request accepted";
     public static final String FRIENDS = "Friends";
+    public static final String USER_DP_BASE_ADDR="http://localhost:8080/friendsbook/usersDp/";
+
 }

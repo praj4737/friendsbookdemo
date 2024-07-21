@@ -19,12 +19,13 @@
 		}
 		String dp=user.getDp();
 
+
 	%>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="color:white">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-          <img src="usersDp/<%= user.getDp()%>" alt="Logo" style="width:40px;" class="rounded-pill">
+          <img src="<%= user.getDp()%>" alt="Logo" style="width:40px;" class="rounded-pill">
         </a>
         <span class="ms-2"><%= user.getUserName() %></span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">

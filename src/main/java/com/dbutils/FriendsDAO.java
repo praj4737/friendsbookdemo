@@ -25,7 +25,9 @@ public class FriendsDAO {
             st= con.createStatement();
             String query="select users.userId,users.name,users.gender,users.dob,users.email,dp.imageUrl from users\n" +
                     "left join dp_table dp on dp.userId=users.userId\n" +
-                    "where users.userId not in (select friend_user_id from friends where userId="+user.getUserId()+" union select userId from friend_request where friend_userId="+user.getUserId()+");";
+                    "where users.userId not in (select friend_user_id from friends where userId="+user.getUserId()
+                    +" union select userId from friend_request where friend_userId="+user.getUserId()
+                    +" union select "+user.getUserId()+");";
             rd=st.executeQuery(query);
             if(rd!=null){
                 peopleYouMayKnow=new ArrayList<>();
@@ -36,7 +38,7 @@ public class FriendsDAO {
                             rd.getString(3),
                             rd.getDate(4).toLocalDate(),
                             rd.getString(5),
-                            rd.getString(6));
+                            AppContants.USER_DP_BASE_ADDR+rd.getString(6));
                     peopleYouMayKnow.add(u);
                 }
             }
@@ -146,7 +148,7 @@ public class FriendsDAO {
                //user.setGender(rs.getString(4));
                //user.setDob(rs.getDate(5).toLocalDate());
                //user.setStart_date(rs.getDate(6).toLocalDate());
-                user.setDp(rs.getString(3));
+                user.setDp(AppContants.USER_DP_BASE_ADDR+rs.getString(3));
                requests.add(user);
             }
 

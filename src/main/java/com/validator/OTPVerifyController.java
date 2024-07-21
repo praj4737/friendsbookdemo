@@ -2,6 +2,7 @@ package com.validator;
 
 import com.beans.JsonConverter;
 import com.beans.User;
+import com.constants.AppContants;
 import com.constants.CommonErros;
 import com.dbutils.UserDAO;
 import com.response.beans.UserRegistrationResponse;
@@ -25,6 +26,7 @@ public class OTPVerifyController extends HttpServlet {
             if(expectedOTP.equals(actualInputOTP.trim())){
                 User user=(User)session.getAttribute("user");
                 UserDAO.registerUsersss(user,response);
+                user.setDp(AppContants.USER_DP_BASE_ADDR+user.getDp());
                 response.setMessage("User Registered Successfuly");
                 response.setStatus("200");
             }else{
