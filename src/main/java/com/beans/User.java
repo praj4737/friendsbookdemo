@@ -12,6 +12,16 @@ public class User {
     private String password;
     private String dp;
     private UserPost userPost;
+    private LocalDate start_date;
+
+    public LocalDate getStart_date() {
+        return start_date;
+    }
+
+    public void setStart_date(LocalDate start_date) {
+        this.start_date = start_date;
+    }
+
     public User(){}
     public User(int userId, String userName, String gender, LocalDate dob, String email, String password, String dp) {
         this.userId = userId;

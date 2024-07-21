@@ -11,4 +11,8 @@ public class CommonErros {
     public static final String LOGIN_FAILED="LOGIN_FAILED";
     public static final String PASSWORD_STANDARD_ERROR = "PASSWORD IS NOT STRONG";
     public static final String INVALID_FILE_TYPE = "INVALID FILE TYPE";
+    public static final String FRIEND_REQUEST_NOT_SENT = "Friend Request Not Sent";
+    public static final String FRIEND_REQUEST_NOT_REVOKED = "FRIEND_REQUEST_REVOKE FAILED";
+    public static final String FAILED = "failed";
+    public static final String FRIEND_REQUEST_ACCEPTING_FAILED = "FRIEND_REQUEST_ACCEPTING_FAILED";
 }
