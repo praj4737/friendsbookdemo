@@ -80,51 +80,50 @@ public class UserDAO {
         return count;
     }
 
-    public static void registerUsersss(User user, UserRegistrationResponse response){
-        Connection con=DBUtils.getDbConnection();
-        try {
-            // here we are setting the autocommit to false as the changes should not be automatically committed.
-            con.setAutoCommit(false);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        PreparedStatement pst=null;
-        PreparedStatement pst2=null;
-        String query1="insert into users values("+user.getUserId()+",'"+user.getEmail()+"','"+user.getUserName()+"','"+user.getGender()+"','"+user.getDob()+"');";
-        String query2="insert into creds values("+(UserDAO.getCorrespondigId("creds")+1)+","+user.getUserId()+",'"+user.getPassword()+"','"+ LocalDate.now()+"',null);";
-        try {
-            pst=con.prepareStatement(query1);
-            pst2=con.prepareStatement(query2);
-            pst.executeUpdate();
-            pst2.executeUpdate();
-            con.commit();
-            response.updateResponse(null,AppContants.SUCCESS_CODE,AppContants.USER_REGISTERED);
-            response.setUserId(user.getUserId());
-        } catch (SQLException e) {
-            try {
-                con.rollback();
-                response.updateResponse(CommonErros.UNABLE_TO_REGISTER_USER,CommonErros.BAD_REQUEST,null);
-            } catch (SQLException ex) {
+        public static void registerUsersss(User user, UserRegistrationResponse response) {
+            Connection con = DBUtils.getDbConnection();
+            CallableStatement cstmt = null;
 
-            }
-
-        }finally {
             try {
-                pst.close();
-                pst2.close();
-                con.close();
+                // Prepare the stored procedure call
+                String procedureCall = "{CALL registerUsers(?, ?, ?, ?, ?, ?)}";
+                cstmt = con.prepareCall(procedureCall);
+
+                // Set parameters for the stored procedure
+                cstmt.setInt(1, user.getUserId());
+                cstmt.setString(2, user.getEmail());
+                cstmt.setString(3, user.getUserName());
+                cstmt.setString(4, user.getGender());
+                cstmt.setDate(5, java.sql.Date.valueOf(user.getDob())); // Convert LocalDate to java.sql.Date
+                cstmt.setString(6, user.getPassword());
+                // Execute the stored procedure
+                cstmt.execute();
+
+                // Update response for successful registration
+                response.updateResponse(null, AppContants.SUCCESS_CODE, AppContants.USER_REGISTERED);
+                response.setUserId(user.getUserId());
             } catch (SQLException e) {
+                // Update response for registration failure
+                response.updateResponse(CommonErros.UNABLE_TO_REGISTER_USER, CommonErros.BAD_REQUEST, null);
                 throw new RuntimeException(e);
+            } finally {
+                // Clean up resources
+                try {
+                    if (cstmt != null) cstmt.close();
+                    if (con != null) con.close();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
-    }
+
 
     public static void dpUploaddao(User user , DPUploadResponse response) {
         Connection con=DBUtils.getDbConnection();
         Statement st=null;
         ResultSet rd=null;
         boolean result=false;
-        String QUERY = "insert into dp_table values("+getCorrespondigId("dp_table")+","+user.getUserId()+",'"+user.getDp()+"','"+LocalDate.now()+"', null);";
+        String QUERY = "update dp_table set imageUrl = '"+user.getDp()+"' where userId = "+user.getUserId();
         try {
             st = con.createStatement();
             int row =  st.executeUpdate(QUERY);

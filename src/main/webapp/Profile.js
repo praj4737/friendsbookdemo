@@ -25,7 +25,7 @@ $(document).ready(function() {
                 $("#ListFriends").append( '<div class="friends card mt-3" style="width: 15rem;">'+
                     '<div class="d-flex">'+
                         '<img class="img-thumbnail" src="'+item.dp+'" alt="..." style="height: 70px; width: 70px;">'+
-                    '<a class="username ms-3" href="" data-id = "'+item.userId+'"><b>'+item.userName+'</b></a><br>'+
+                    '<a class="username ms-3" href="" data-id = "'+item.userId+'" style="font-size:15px"><b>'+item.userName+'</b></a><br>'+
                     
                     
                     '</div>'+
@@ -338,6 +338,47 @@ $(document).on("click", "#commentText", function(){
   box = $(this)
   box.css("border","1px solid blue")
 });
+
+
+$(document).on("click", ".unfriend", function(){
+   
+   
+    console.log("unfriend btn clicked.");
+    var friendId = $(this).data("id");
+    var friendCard = $(this).closest(".friends");
+   
+    $.ajax({
+        type: 'GET',
+        url: "unfriend",
+        data: {friend_user_id: friendId},
+        success: function (data) {
+            var response = JSON.parse(data);
+                var items = JSON.parse(response.data);
+                console.log(items);
+            if(response.status === "200"){
+
+                friendCard.fadeOut(300, function() {
+                    $(this).remove();
+                });
+              
+  
+  
+  
+            }else if(response.status === "400"){
+                //("could not load likes");
+            }
+        },
+        error: function (data) {
+            //("An error occurred: " + data);
+            console.log(data);
+        }
+    });
+  });
+  
+
+
+
+
 
   
      // });

@@ -103,7 +103,7 @@ public class FriendsDAO {
         Connection con = null;
         Statement st = null;
         ResultSet rs = null;
-        String QUERY = "insert into friend_request values('req"+UserDAO.getCorrespondigId("friend_request")+"',"+userId+","+friendUserId+",'"+LocalDate.now()+"',0);";
+        String QUERY = "insert into friend_request(userId,friend_userId,start_date,status) values("+userId+","+friendUserId+",'"+LocalDate.now()+"',0);";
 
         con = DBUtils.getDbConnection();
 
@@ -166,42 +166,52 @@ public class FriendsDAO {
 
     }
 
-    public static void confirmFriendRequest(int userId, int friendUserId, AcceptFriendRequestResponse response){
-        Connection con=null;
-        PreparedStatement pst1 = null;
-        PreparedStatement pst2 = null;
-        PreparedStatement pst3 = null;
-        ResultSet rs = null;
-        String QUERY1 = "insert into friends values('con"+UserDAO.getCorrespondigId("friends")+"',"+userId+","+friendUserId+",1);";
-        String QUERY2 = "update friend_request set status= 1 where userId= " + userId + " and  friend_userId = " + friendUserId+";";
-        String QUERY3 = "insert into friends values('con"+(UserDAO.getCorrespondigId("friends")+1)+"',"+friendUserId+","+userId+",1);";
+    public static void confirmFriendRequest(int userId, int friendUserId, AcceptFriendRequestResponse response) {
+        Connection con = null;
+        CallableStatement cstmt = null;
+
+        String CALL_PROCEDURE = "{CALL acceptFriendRequest(?, ?)}";
+
         con = DBUtils.getDbConnection();
 
-        try{
+        try {
             con.setAutoCommit(false);
-           pst1 = con.prepareStatement(QUERY1);
-           pst2 = con.prepareStatement(QUERY2);
-           pst3 = con.prepareStatement(QUERY3);
-           pst1.executeUpdate();
-           pst2.executeUpdate();
-           pst3.executeUpdate();
-           con.commit();
+            cstmt = con.prepareCall(CALL_PROCEDURE);
+            cstmt.setInt(1, userId);
+            cstmt.setInt(2, friendUserId);
+            cstmt.executeUpdate();
+            con.commit();
 
-           response.setStatus(AppContants.SUCCESS_CODE);
-           response.setMessage(AppContants.FRIEND_REQUEST_ACCEPTED);
-           response.setData(AppContants.FRIENDS);
+            response.setStatus(AppContants.SUCCESS_CODE);
+            response.setMessage(AppContants.FRIEND_REQUEST_ACCEPTED);
+            response.setData(AppContants.FRIENDS);
 
-
-        }catch (SQLException se){
+        } catch (SQLException se) {
             try {
-                con.rollback();
+                if (con != null) {
+                    con.rollback();
+                }
                 response.setStatus(CommonErros.BAD_REQUEST);
                 response.setMessage(CommonErros.FRIEND_REQUEST_ACCEPTING_FAILED);
                 response.setData(null);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
-
+        } finally {
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    // handle exception
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    // handle exception
+                }
+            }
         }
     }
 
@@ -252,32 +262,30 @@ public class FriendsDAO {
 
     }
 
-    public static void unfriend(int userId,int friend_user_id, UnfriendResponse response){
+    public static void unfriend(int userId, int friend_user_id, UnfriendResponse response) {
         Connection con = null;
-        PreparedStatement pst1 = null;
-        PreparedStatement pst2 = null;
-        PreparedStatement pst3 = null;
-        int row = 0;
+        CallableStatement cstmt = null;
 
-        String QUERY = "delete from friends where userId= " + userId + " and  friend_user_id= " + friend_user_id + ";";
-        String QUERY2 = "delete from friends where userId= " + friend_user_id + " and  friend_user_id= " + userId + ";";
-        String QUERY3 = "delete from friend_request where (userId= " + userId + " and  friend_userId= " + friend_user_id +") or (userId ="+friend_user_id+" and friend_userId= "+userId+");";
+        String CALL_PROCEDURE = "{CALL unfriendUser(?, ?)}";
+
         con = DBUtils.getDbConnection();
-        try{
+
+        try {
             con.setAutoCommit(false);
-            pst1 = con.prepareStatement(QUERY);
-            pst2 = con.prepareStatement(QUERY2);
-            pst3 = con.prepareStatement(QUERY3);
-            pst1.executeUpdate();
-            pst2.executeUpdate();
-            pst3.executeUpdate();
+            cstmt = con.prepareCall(CALL_PROCEDURE);
+            cstmt.setInt(1, userId);
+            cstmt.setInt(2, friend_user_id);
+            cstmt.executeUpdate();
             con.commit();
+
             response.setStatus(AppContants.SUCCESS_CODE);
             response.setMessage(AppContants.UNFRIENDED_SUCESSFULLY);
             response.setData(AppContants.UNFRIEND);
-        }catch (SQLException se){
+        } catch (SQLException se) {
             try {
-                con.rollback();
+                if (con != null) {
+                    con.rollback();
+                }
                 response.setStatus(CommonErros.BAD_REQUEST);
                 response.setMessage(CommonErros.FAILED_TO_UNFRIEND);
                 response.setData(null);
@@ -285,8 +293,22 @@ public class FriendsDAO {
                 e.printStackTrace();
             }
             se.printStackTrace();
+        } finally {
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    // handle exception
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    // handle exception
+                }
+            }
         }
-
     }
 
 

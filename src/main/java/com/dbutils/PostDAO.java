@@ -107,7 +107,7 @@ public class PostDAO {
         //PreparedStatement st2 = null;
         ResultSet rs = null;
         boolean result=false;
-        String QUERY = "insert into user_post values('"+"post"+UserDAO.getCorrespondigId("user_post")+"',"+user.getUserId()+",'"+user.getUserPost().getCaption()+"','"+user.getUserPost().getImage()+"','"+user.getUserPost().getLikes()+"','"+user.getUserPost().getComments()+"','"+user.getUserPost().getShares()+"','"+user.getUserPost().getDateOfPost()+"',null);";
+        String QUERY = "insert into user_post(userId,caption,imageAddr,likes,comments,share,start_date,top) values("+user.getUserId()+",'"+user.getUserPost().getCaption()+"','"+user.getUserPost().getImage()+"','"+user.getUserPost().getLikes()+"','"+user.getUserPost().getComments()+"','"+user.getUserPost().getShares()+"','"+user.getUserPost().getDateOfPost()+"',null);";
         //String QUERY2 = "insert into likepost values("+UserDAO.getCorrespondigId("likepost")+","+user.getUserId()+",'post"+UserDAO.getCorrespondigId("user_post")+"',0);";
 
         con = DBUtils.getDbConnection();
@@ -149,35 +149,39 @@ public class PostDAO {
 
         return false;
     }
-    public static void likePost(int userId, String postId, PostLikeResponse response){
+    public static void likePost(int userId, String postId, PostLikeResponse response) {
         Connection con = null;
-        PreparedStatement st = null;
-        PreparedStatement st1 = null;
-        ResultSet rs = null;
-        String QUERY = "insert into likepost(userId,postId) values("+userId+",'"+postId+"');";
-        String QUERY1 = "update user_post set likes = likes+1 where postId = '" + postId +"';";
+        CallableStatement cstmt = null;
+
+        String CALL_PROCEDURE = "{CALL addLike(?, ?)}";
+
         con = DBUtils.getDbConnection();
-        try{
+
+        try {
             con.setAutoCommit(false);
-            st = con.prepareStatement(QUERY);
-            st1 = con.prepareStatement(QUERY1);
-            int row = st.executeUpdate();
-            int row1 = st1.executeUpdate();
+            cstmt = con.prepareCall(CALL_PROCEDURE);
+            cstmt.setInt(1, userId);
+            cstmt.setString(2, postId);
+            cstmt.executeUpdate();
             con.commit();
-            if(row>0 && row1>0){
+
+
                 response.setStatus(AppContants.SUCCESS_CODE);
                 response.setMessage(AppContants.POST_LIKED);
                 response.setData(null);
                 response.setButtonColor(AppContants.LIKE_COLOR);
-            }else{
-                response.setStatus(CommonErros.BAD_REQUEST);
-                response.setMessage(CommonErros.FAILED);
-                response.setData(null);
-                response.setButtonColor(AppContants.LIKE_COLOR);
-            }
-        }catch(SQLException se){
+
+
+
+        } catch (SQLException se) {
+            response.setStatus(CommonErros.BAD_REQUEST);
+            response.setMessage(CommonErros.FAILED);
+            response.setData(null);
+            response.setButtonColor(AppContants.LIKE_COLOR);
             try {
-                con.rollback();
+                if (con != null) {
+                    con.rollback();
+                }
                 response.setStatus(CommonErros.BAD_REQUEST);
                 response.setMessage(CommonErros.FAILED_TO_UPDATE_LIKE_DUE_TO_EXCEPTION);
                 response.setData(null);
@@ -185,43 +189,55 @@ public class PostDAO {
                 e.printStackTrace();
             }
             se.printStackTrace();
+        } finally {
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
-
-
     }
 
-    public static void unlikePost(int userId,String postId,PostLikeResponse response){
-
+    public static void unlikePost(int userId, String postId, PostLikeResponse response) {
         Connection con = null;
-        PreparedStatement st = null;
-        PreparedStatement st1 = null;
-        ResultSet rs = null;
-        String QUERY = "delete from likepost where userId = " + userId + " and postId = '" + postId +"';";
-        String QUERY1 = "update user_post set likes = likes-1 where postId = '" + postId +"';";
+        CallableStatement cstmt = null;
+
+        String CALL_PROCEDURE = "{CALL removeLike(?, ?)}";
 
         con = DBUtils.getDbConnection();
-        try{
-            con.setAutoCommit(false);
-            st = con.prepareStatement(QUERY);
-            st1 = con.prepareStatement(QUERY1);
 
-            int row = st.executeUpdate();
-            int row1 = st1.executeUpdate();
+        try {
+            con.setAutoCommit(false);
+            cstmt = con.prepareCall(CALL_PROCEDURE);
+            cstmt.setInt(1, userId);
+            cstmt.setString(2, postId);
+            int row = cstmt.executeUpdate();
             con.commit();
-            if(row>0 && row1>0){
+
+
                 response.setStatus(AppContants.SUCCESS_CODE);
                 response.setMessage(AppContants.POST_UNLIKED);
                 response.setData(null);
                 response.setButtonColor(AppContants.UNLIKE_COLOR);
-            }else{
-                response.setStatus(CommonErros.BAD_REQUEST);
-                response.setMessage(CommonErros.FAILED);
-                response.setData(null);
-            }
-        }catch(SQLException se){
+
+
+        } catch (SQLException se) {
+            response.setStatus(CommonErros.BAD_REQUEST);
+            response.setMessage(CommonErros.FAILED);
+            response.setData(null);
             try {
-                con.rollback();
+                if (con != null) {
+                    con.rollback();
+                }
                 response.setStatus(CommonErros.BAD_REQUEST);
                 response.setMessage(CommonErros.FAILED_TO_UPDATE_LIKE_DUE_TO_EXCEPTION);
                 response.setData(null);
@@ -229,10 +245,22 @@ public class PostDAO {
                 e.printStackTrace();
             }
             se.printStackTrace();
+        } finally {
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
-
-
     }
     public static List<User> getPosts(int userId,int limit,int offset,ShowPostResponse response){
         Connection con = null;
@@ -329,44 +357,59 @@ public class PostDAO {
         }
     }
 
-    public static void commentOnPost(int userId, String postId,String comment, CommentPostedResponse response){
+    public static void commentOnPost(int userId, String postId, String comment, CommentPostedResponse response) {
         Connection con = null;
-        PreparedStatement st = null;
-        PreparedStatement st1 = null;
-        ResultSet rs = null;
-        String QUERY = "insert into comments(userId,postId,comment,start_date) values("+userId+",'"+postId+"','"+comment+"','"+ LocalDate.now()+"');";
-        String QUERY1 = "update user_post set comments = comments+1 where postId = '" + postId +"';";
+        CallableStatement cstmt = null;
+
+        String CALL_PROCEDURE = "{CALL addComment(?, ?, ?, ?)}";
+
         con = DBUtils.getDbConnection();
-        try{
+
+        try {
             con.setAutoCommit(false);
-            st = con.prepareStatement(QUERY);
-            st1 = con.prepareStatement(QUERY1);
-            int row = st.executeUpdate();
-            int row1 = st1.executeUpdate();
+            cstmt = con.prepareCall(CALL_PROCEDURE);
+            cstmt.setInt(1, userId);
+            cstmt.setString(2, postId);
+            cstmt.setString(3, comment);
+            cstmt.setDate(4, java.sql.Date.valueOf(LocalDate.now()));
+            int row = cstmt.executeUpdate();
             con.commit();
-            if(row>0 && row1>0){
+
+
                 response.setStatus(AppContants.SUCCESS_CODE);
                 response.setMessage(AppContants.COMMENTS_POSTED_SUCCESSFULLY);
                 response.setData(postId);
-            }else{
+
+
+
+        } catch (SQLException se) {
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
                 response.setStatus(CommonErros.BAD_REQUEST);
                 response.setMessage(CommonErros.FAILED_TO_POST_COMMENTS);
-                response.setData(null);
-            }
-        }catch(SQLException se){
-            try {
-                con.rollback();
-                response.setStatus(CommonErros.BAD_REQUEST);
-                response.setMessage(CommonErros.FAILED_TO_UPDATE_LIKE_DUE_TO_EXCEPTION);
                 response.setData(null);
             } catch (SQLException e) {
                 e.printStackTrace();
             }
             se.printStackTrace();
+        } finally {
+            if (cstmt != null) {
+                try {
+                    cstmt.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
         }
-
-
-
     }
 
     public static void likes(String postId, LikesLoadResponse response){

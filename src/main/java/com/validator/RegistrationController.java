@@ -37,7 +37,7 @@ public class RegistrationController extends HttpServlet {
         UserRegistrationResponse response=new UserRegistrationResponse();
 
         if(confirmPassword.equals(password)){
-            User user=new User(UserDAO.getCorrespondigId("users"),fName+" "+lName,gender,dob,email,password,null);
+            User user=new User(UserDAO.getCorrespondigId("users"),fName+" "+lName,gender,dob,email,password,AppContants.USER_DP_BASE_ADDR+"DefaultUserDp.png");
             if(DataValidator.validateUserData(user,response)){
                 HttpSession session=req.getSession();
                 session.setAttribute("user",user);

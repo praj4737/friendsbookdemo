@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class DBUtils {
     public static Connection getDbConnection() {
-        String url="jdbc:mysql://localhost:3306/friendsbook_db";
+        String url="jdbc:mysql://localhost:3306/friendsbook_db2";
         String user="root";
         String password="Computer@123";
         Connection con=null;
