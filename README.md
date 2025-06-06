@@ -75,5 +75,5 @@ Download and install MySQL Community Server and MySQL Workbench from the officia
 - Verify that the Smart Tomcat configuration is correctly set up.
 - Check for any error messages in the IDE console and resolve them as needed.
 
-Feel free to reach out if you encounter any issues or have any questions!
+Thank you.
 
