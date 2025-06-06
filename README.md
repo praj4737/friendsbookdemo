@@ -77,6 +77,3 @@ Download and install MySQL Community Server and MySQL Workbench from the officia
 
 Feel free to reach out if you encounter any issues or have any questions!
 
----
-
-This `README.md` file should guide you through setting up and running the FriendsBook application. Let me know if you need any further assistance!
